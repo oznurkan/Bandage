@@ -1,1 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+
+@theme {
+    --font-montserrat : Montserrat;
+    --color-text-color: #252B42;
+    --color-thin-white: #FAFAFA;
+    --color-primary-blue: #23A6F0;
+    --color-active-blue: #8EC2F2;
+    --color-second-text-color: #737373;
+    --color-primary-color: #23A6F0;
+    --color-primary-beige: #E6E6E6;
+    --color-hover-text-color: #2A7CC7;
+    --color-muted-color: #BDBDBD;
+    --color-second-color-1: #23856D;
+    --color-danger-color: #E74040;
+    --color-primary-purple: #977DF4;
+    --color-dark-background-color: #252B42;
+    --color-primary-yellow: #FFCE31;
+    --color-alert-color:#E77C40;
+    
+
+}

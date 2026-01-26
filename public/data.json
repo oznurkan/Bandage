@@ -1,0 +1,283 @@
+{
+    "header": {
+        "title": "Bandage",
+        "categories": [ "home", "shop", "about", "blog", "contact", "pages"],
+        "authentication": {
+            "login": "login",
+            "register": "register"
+        },
+        "telephone" : "(225) 555-0118",
+        "email": "michelle.rivera@example.com",
+        "text": "Follow Us  and get a chance to win 80% off",
+        "follow": "Follow Us",
+        "instagram": "https://www.instagram.com/",
+        "twitter": "https://x.com/",
+        "youtube": "https://www.youtube.com/",
+        "facebook" : "https://www.facebook.com/"
+
+    },
+    "headerSection": {
+        "season": "SUMMER 2020",
+        "title": "NEW COLLECTION",
+        "paragraph" : "We know how large objects will act, but things on a small scale.",
+        "buttonText": "SHOP NOW",
+        "images": "/assets/header/header.png"
+    },
+    "shopCardSection": {
+        "shopCards" : [
+            {
+                "id": "1",
+                "buttonText": "EXPLORE ITEMS",
+                "ariaLabel": "explore items",
+                "text": "Top Product Of the Week",
+                "images": "/assets/shopCard/images_1.png"
+            },
+            {
+                "id": "2",
+                "buttonText": "EXPLORE ITEMS",
+                "ariaLabel": "explore items",
+                "text": "Top Product Of the Week",
+                "images": "/assets/shopCard/images_2.png"
+            },
+            {
+                "id": "3",
+                "buttonText": "EXPLORE ITEMS",
+                "ariaLabel": "explore items",
+                "text": "Top Product Of the Week",
+                "images": "/assets/shopCard/images_3.png"
+            }
+        ]
+    },
+    "productCardSection":{
+        "title": "BESTSELLER PRODUCTS",
+        "subtitle": "Featured Products",
+        "paragraph": "Problems trying to resolve the conflict between ",
+        "buttonText": "load more products",
+        "productsCard": [
+            {
+                "id": "1",
+                "title": "Graphic Design",
+                "subtitle": "English Department",
+                "price": {
+                    "old": "16.48",
+                    "new": "6.48"
+                },
+                "images": "/assets/productCard/images_1.jpg"
+            },
+            {
+                "id": "2",
+                "title": "Graphic Design",
+                "subtitle": "English Department",
+                "price": {
+                    "old": "16.48",
+                    "new": "6.48"
+                },
+                "images": "/assets/productCard/images_2.jpg"
+            },
+            {
+                "id": "3",
+                "title": "Graphic Design",
+                "subtitle": "English Department",
+                "price": {
+                    "old": "16.48",
+                    "new": "6.48"
+                },
+                "images": "/assets/productCard/images_3.jpg"
+            },
+            {
+                "id": "4",
+                "title": "Graphic Design",
+                "subtitle": "English Department",
+                "price": {
+                    "old": "16.48",
+                    "new": "6.48"
+                },
+                "images": "/assets/productCard/images_4.jpg"
+            },
+            {
+                "id": "5",
+                "title": "Graphic Design",
+                "subtitle": "English Department",
+                "price": {
+                    "old": "16.48",
+                    "new": "6.48"
+                },
+                "images": "/assets/productCard/images_5.jpg"
+            },
+            {
+                "id": "6",
+                "title": "Graphic Design",
+                "subtitle": "English Department",
+                "price": {
+                    "old": "16.48",
+                    "new": "6.48"
+                },
+                "images": "/assets/productCard/images_6.jpg"
+            },
+            {
+                "id": "7",
+                "title": "Graphic Design",
+                "subtitle": "English Department",
+                "price": {
+                    "old": "16.48",
+                    "new": "6.48"
+                },
+                "images": "/assets/productCard/images_7.jpg"
+            },
+            {
+                "id": "8",
+                "title": "Graphic Design",
+                "subtitle": "English Department",
+                "price": {
+                    "old": "16.48",
+                    "new": "6.48"
+                },
+                "images": "/assets/productCard/images_8.jpg"
+            },
+            {
+                "id": "9",
+                "title": "Graphic Design",
+                "subtitle": "English Department",
+                "price": {
+                    "old": "16.48",
+                    "new": "6.48"
+                },
+                "images": "/assets/productCard/images_8.jpg"
+            },
+            {
+                "id": "10",
+                "title": "Graphic Design",
+                "subtitle": "English Department",
+                "price": {
+                    "old": "16.48",
+                    "new": "6.48"
+                },
+                "images": "/assets/productCard/images_8.jpg"
+            }
+        ]
+    
+    },
+    "contentSection": {
+        "subtitle": "Featured Products",
+        "title": "We love what we do",
+        "images_1": "/assets/content/images_1.jpg",
+        "images_2": "/assets/content/images_2.jpg",
+        "paragraph": {
+            "paragraph_1": "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics. ",
+            "paragraph_2": "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics"
+        }
+
+    },
+    "featuresProductSection": {
+        "subtitle": "Featured Products",
+        "title": "THE BEST SERVICES",
+        "paragraph": "Problems trying to resolve the conflict between ",
+        "features": [
+            {
+                "id": "1",
+                "title" : "Easy Wins",
+                "text": "Get your best looking smile now!"
+            },
+            {
+                "id": "2",
+                "title" : "Concrete",
+                "text": "Defalcate is most focused in helping you discover your most beautiful smile"
+            },
+            {
+                "id": "3",
+                "title" : "Hack Growth",
+                "text": "Overcame any hurdle or any other problem."
+            }
+        ]
+    },
+    "blogSection": {
+        "subtitle": "Practice Advice",
+        "title": "Featured Posts",
+        "blog": [
+            {
+                "id": "1",
+                "images": "/assets/blog/images_1.jpg",
+                "star": "4.9",
+                "subtitle": "English Department",
+                "title": "Graphic Design", 
+                "paragraph": "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
+                "sales": {
+                    "text": "sales",
+                    "sale": "15"
+                },
+                "price": {
+                    "old": "16.48",
+                    "new": "6.48"
+                },
+                "productInfo": {
+                    "lessons": {
+                        "text": "Lessons",
+                        "lesson": "64"
+                    },
+                    "date": "23 January 2024",
+                    "progress": "Progress"
+                },
+                "buttonText": "learn more"
+            },
+            {
+                "id": "2",
+                "images": "/assets/blog/images_2.jpg",
+                "star": "4.9",
+                "subtitle": "English Department",
+                "title": "Graphic Design", 
+                "paragraph": "We focus on ergonomics and meeting you where you work. It's only a keystroke away.",
+                "sales": {
+                    "text": "sales",
+                    "sale": "15"
+                },
+                "price": {
+                    "old": "16.48",
+                    "new": "6.48"
+                },
+                "productInfo": {
+                    "lessons": {
+                        "text": "Lessons",
+                        "lesson": "64"
+                    },
+                    "date": "23 January 2025",
+                    "progress": "Progress"
+                },
+                "buttonText": "learn more"
+            }
+            
+        ]
+
+    },
+    "footer": {
+        "title": "Bandage",
+        "information": [
+            {
+                "id": "1",
+                "title": "Company Info",
+                "links": [ "About Us", "Carrier", "We are hiring", "Blog"]
+            },
+            {
+                "id": "2",
+                "title": "Legal",
+                "links": [ "About Us", "Carrier", "We are hiring", "Blog"]
+            },
+            {
+                "id": "3",
+                "title": "Features",
+                "links": [ "Business Marketing", "User Analytic", "Live Chat", "Unlimited Support"]
+            },
+            {
+                "id": "4",
+                "title": "Resources",
+                "links": [ "IOS & Android", "Watch a Demo", "Customers", "API"]
+            }
+
+        ],
+        "form": {
+            "title": "Get In Touch",
+            "buttonText": "Subscribe"
+        },
+        "text": "Made With Love By Finland All Right Reserved "
+
+    }
+}
