@@ -45,7 +45,7 @@ const ShopProductCard = ({ products, loading, isGridView }) => {
                   }`}
                 >
                   <h5 className="text-base text-text-color">{product.title}</h5>
-                  <a onClick={() => navigate(`/shop/${product.id}`)} className="text-sm text-second-text-color">
+                  <a onClick={() => navigate(`/shop/${product.id}`)} className="text-sm cursor-pointer text-second-text-color">
                     {product.subtitle}
                   </a>
                   <div

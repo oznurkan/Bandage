@@ -47,11 +47,11 @@ const ProductDescription = () => {
             Reviews <span className="text-second-color-1">{product.reviews}</span>
           </a>
         </nav>
-        <div className="flex flex-col mx-auto gap-20 pb-20 pt-10 w-[85%]">
-          <div className="flex w-full h-68 rounded-3xl">
+        <div className="flex flex-col mx-auto gap-20 pb-20 pt-10 w-[85%] xl:flex-row">
+          <div className="flex w-full h-110 rounded-3xl xl:flex-1 xl:h-100">
             <img className="w-full h-full object-contain" src={images[0]} alt="" />
           </div>
-          <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-12 xl:flex-1">
             <h3 className="font-bold text-2xl leading-6 text-text-color">
               the quick fox jumps over{" "}
             </h3>
@@ -59,7 +59,7 @@ const ProductDescription = () => {
               {product.description}{product.description}{product.description}{product.description}{product.description}
             </p>
           </div>
-          <div className="flex flex-col gap-10">
+          <div className="flex flex-col gap-8 xl:flex-1">
             <h5 className="font-bold text-2xl leading-8 text-text-color">
               the quick fox jumps over{" "}
             </h5>

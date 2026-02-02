@@ -30,21 +30,22 @@ const BestsellerProduct = () => {
     .slice(0, 3);
 
   return (
-    <section className="w-full bg-thin-white flex flex-col items-center font-montserrat py-20">
-      <h3 className="font-bold text-2xl leading-8 text-text-color uppercase tracking-tight">
+    <section className="w-full bg-thin-white flex flex-col items-center mx-auto font-montserrat py-20">
+      <article className="flex flex-col items-center mx-auto font-montserrat xl:w-[82%] xl:items-start">
+         <h3 className="font-bold text-2xl leading-8 text-text-color uppercase tracking-tight ">
         BESTSELLER PRODUCTS
       </h3>
       <hr className="w-[80%] my-8 border-gray-200" />
       
       {bestsellers.length > 0  && (
-        <article className="flex flex-wrap justify-center py-10 px-8 gap-8 w-full max-w-7xl">
+        <article className="flex flex-wrap justify-center py-10 px-8 gap-8 w-full max-w-7xl xl:px-0">
           {bestsellers.map((product) => (
             <div
               key={product.id}
               onClick={() => navigate(`/shop/${product.id}`)}
-              className="flex flex-col items-center bg-white gap-4 cursor-pointer w-[94%] group hover:shadow-xl transition-all duration-300 sm:w-[70%] md:w-[30%] xl:w-[22%] border border-gray-100 rounded-lg"
+              className="flex flex-col items-center bg-white gap-4 cursor-pointer w-[94%] group hover:shadow-xl transition-all duration-300 sm:w-[70%] md:w-[30%] xl:w-[31%] border border-gray-100 rounded-lg"
             >
-              <div className="flex justify-center items-center w-full overflow-hidden bg-white md:h-48">
+              <div className="flex justify-center items-center w-full overflow-hidden bg-white md:h-48 xl:h-110">
                 <img
                   className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                   src={Array.isArray(product.images) && product.images.length > 0 ? product.images[0] : ""}
@@ -72,6 +73,9 @@ const BestsellerProduct = () => {
           ))}
         </article>
       )}
+
+      </article>
+     
     </section>
   );
 };
