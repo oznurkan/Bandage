@@ -12,9 +12,11 @@ import { FaChartArea } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getDataInfo } from "../../store/slices/dataInfoSlice";
+import { useNavigate } from "react-router-dom";
 
 const Blog = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { content, loading, error } = useSelector((state) => state.appData);
 
   useEffect(() => {
@@ -39,19 +41,20 @@ const Blog = () => {
             </h3>
           </article>
 
-          <article className="flex flex-col gap-20 xl:flex-row xl:gap-10 ">
+          <article className="flex flex-col gap-20 md:flex-row xl:gap-10 ">
             {blogSection.blog.map((blog) => (
               <article
                 key={blog.id}
-                className="gap-8 flex flex-col shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] xl:flex-row xl:h-102.5 xl:gap-5"
+                className="gap-8 flex flex-col mx-auto w-84 h-190 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.1)] xl:flex-row xl:w-lg xl:h-102.5 xl:gap-5"
               >
-                <div className="relative w-82.5 h-75 xl:h-full xl:w-full">
+                <div className="relative w-84 h-90 xl:h-full xl:w-full">
                   <div className="absolute z-10 bg-danger-color rounded-sm py-1 px-2.5 text-white capitalize font-montserrat font-bold text-sm leading-6 top-5 left-5 ">
                     sale
                   </div>
                   <div className="absolute w-full flex justify-center items-center z-10 bottom-5 gap-3">
                     {[Heart, ShoppingCart, Eye].map((Icon, idx) => (
                       <button
+
                         key={idx}
                         className="rounded-full bg-white p-2 hover:bg-gray-100 transition-colors shadow-md"
                       >
@@ -66,7 +69,7 @@ const Blog = () => {
                     alt={blog.title}
                   />
                 </div>
-                <div className="flex flex-col gap-2.5 px-4 pt-6 pb-8 xl:py-8 ">
+                <div className="flex flex-col gap-2.5 px-5 pt-6 pb-8 xl:py-8 ">
                   <div className="flex justify-between items-center">
                     <a
                       href="#"
@@ -94,13 +97,12 @@ const Blog = () => {
                       <h6>{blog.sales.text} </h6>
                     </div>
                   </div>
-                  <div className="flex gap-5 justify-center xl:justify-start">
+                  <div className="flex gap-5 justify-start">
                     <span className="font-montserrat font-bold text-base leading-6 text-muted-color flex gap-1">
-                      <span>$</span> <span>{blog.price.old} </span>
+                     <span>${blog.price.old} </span>
                     </span>
                     <span className="font-montserrat font-bold text-base leading-6 text-second-color-1 flex gap-1">
-                      <span>$</span>
-                      <span>{blog.price.new}</span>
+                      <span>${blog.price.new}</span>
                     </span>
                   </div>
                   <div className="flex gap-1.5">
@@ -116,7 +118,7 @@ const Blog = () => {
                         {blog.productInfo.date}
                       </p>
                     </button>
-                    <button className="flex items-center gap-1">
+                    <button className="hidden items-center gap-1 xl:flex">
                       <LiaChartAreaSolid size={14} color="#E77C40" />
                       <p className="font-normal capitalize text-xs leading-4">
                         {blog.productInfo.lessons.lesson}{" "}
@@ -130,8 +132,10 @@ const Blog = () => {
                       </p>
                     </button>
                   </div>
-                  <a className="flex gap-2.5 border border-primary-blue py-2.5 px-3 rounded-4xl w-fit">
-                    <h6 className="font-bold text-xs capitalize leading-6 text-second-text-color xl:text-sm xl:text-primary-color">
+                  <a 
+                  onClick={() => navigate("/blog")}
+                  className="flex gap-2 py-2.5 px-3 cursor-pointer rounded-4xl w-fit xl:border text-second-text-color xl:text-sm xl:text-primary-color xl:border-primary-blue transition-all duration-300 ease-in-out hover:bg-primary-color hover:text-white">
+                    <h6 className="font-bold text-xs capitalize leading-6  ">
                       {blog.buttonText}
                     </h6>
                     <ChevronRight color="#23A6F0" />

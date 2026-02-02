@@ -24,7 +24,7 @@ const Footer = () => {
   return (
     <footer className="w-full font-montserrat">
       <section className="bg-thin-white">
-        <article className="flex flex-col gap-3 py-15 px-5 mx-auto xl:flex-row xl:justify-between xl:w-[73%] xl:px-0">
+        <article className="flex flex-col gap-3 py-15 px-5 mx-auto md:w-[80%] md:flex-row md:justify-between xl:w-[73%] xl:px-0">
           <h3 className="font-bold text-2xl text-bold-blue">{footer.title}</h3>
           <div className="flex gap-5">
             {socialIcons.map((Icon, idx) => (
@@ -34,7 +34,7 @@ const Footer = () => {
         </article>
       </section>
       <section className="bg-white border-y border-gray-100">
-        <article className="flex flex-col py-18 px-5 gap-8 mx-auto xl:flex-row xl:w-[73%] xl:px-0">
+        <article className="flex flex-col py-18 px-5 gap-8 mx-auto  md:w-[80%] xl:flex-row xl:w-[73%] xl:px-0">
           {footer.information.map((info) => (
             <div key={info.id} className="flex flex-col gap-5 xl:flex-1">
               <h5 className="font-bold text-base text-bold-blue capitalize">{info.title}</h5>
@@ -68,7 +68,7 @@ const Footer = () => {
         </article>
       </section>
       <section className="bg-thin-white py-10">
-        <h6 className="w-[73%] mx-auto font-bold text-sm text-second-text-color text-center xl:text-start capitalize">
+        <h6 className="w-[73%] mx-auto font-bold text-sm text-second-text-color text-center md:w-[80%] md:text-start capitalize">
           {footer.text}
         </h6>
       </section>

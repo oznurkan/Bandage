@@ -33,7 +33,7 @@ const Content = () => {
               ))}
             </div>
           </article>
-          <article className="flex w-full gap-3 px-3 xl:flex-1">
+          <article className="flex w-full gap-3 mx-auto px-3 md:w-[70%]  xl:flex-1">
             <div className="flex-1 h-90.75 xl:h-124.5 overflow-hidden rounded-lg">
               <img 
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" 
