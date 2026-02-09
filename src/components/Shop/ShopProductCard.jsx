@@ -1,8 +1,24 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getProducts } from "../../store/actions/productActions";
+import { useDispatch } from "react-redux";
 
-const ShopProductCard = ({ products, loading, isGridView }) => {
+
+const ShopProductCard = ({ products, isGridView }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  if (loading) return <div>Yükleniyor...</div>;
+  const { gender, categoryName, categoryId } = useParams();
+
+  const handleProductClick = (product) => {
+    const nameSlug = product.name.toLowerCase().replaceAll(" ", "-");
+    navigate(`/shop/${gender}/${categoryName}/${categoryId}/${nameSlug}/${product.id}`);
+  };
+
+  useEffect(() => {
+    if (!products || products.length === 0) {
+      dispatch(getProducts());
+    }
+  }, [dispatch, products]);
 
   return (
     <main className="w-full bg-white font-montserrat">
@@ -20,7 +36,7 @@ const ShopProductCard = ({ products, loading, isGridView }) => {
                 key={product.id}
                 className={
                   isGridView
-                    ? "flex flex-col items-center w-full grow-0 md:w-[46%] lg:w-[30%] xl:w-[22.5%]"
+                    ? "flex flex-col items-center w-full mx-auto grow-0 md:w-[46%] lg:w-[30%] xl:w-[17%]"
                     : "flex flex-row items-center w-full border-b border-[#E8E8E8] pb-6 gap-6"
                 }
               >
@@ -32,8 +48,8 @@ const ShopProductCard = ({ products, loading, isGridView }) => {
                   }
                 >
                   <img
-                    src={product.images && product.images.length > 0 ? product.images[0]: ""}
-                    alt={product.title}
+                    src={product.images?.[0]?.url || ""}
+                    alt={product.name}
                     className="w-full h-full object-contain"
                   />
                 </div>
@@ -44,9 +60,9 @@ const ShopProductCard = ({ products, loading, isGridView }) => {
                       : "items-start text-start"
                   }`}
                 >
-                  <h5 className="text-base text-text-color">{product.title}</h5>
-                  <a onClick={() => navigate(`/shop/${product.id}`)} className="text-sm cursor-pointer text-second-text-color">
-                    {product.subtitle}
+                  <h5 className="text-base text-text-color">{product.name}</h5>
+                  <a onClick={() => handleProductClick(product)} className="text-sm cursor-pointer text-second-text-color">
+                    {product.name}
                   </a>
                   <div
                     className={`flex gap-3 text-base ${
@@ -54,10 +70,10 @@ const ShopProductCard = ({ products, loading, isGridView }) => {
                     }`}
                   >
                     <span className="text-muted-color">
-                      ${product.price.old}
+                      ${product.price}
                     </span>
                     <span className="text-second-color-1">
-                      ${product.price.new}
+                      ${product.price}
                     </span>
                   </div>
                   <div

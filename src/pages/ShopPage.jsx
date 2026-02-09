@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { useEffect, useState, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useSearchParams } from "react-router-dom"; 
+import { getProducts } from "../store/actions/productActions";
 
 import Client from "../components/Home/Client";
 import FilterCard from "../components/Shop/FilterCard";
@@ -10,119 +11,107 @@ import ShopNavbar from "../components/Shop/ShopNavbar";
 import ShopProductCard from "../components/Shop/ShopProductCard";
 
 const ShopPage = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const dispatch = useDispatch();
+  const { categoryId } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+
+  const { productList: products, fetchState, total } = useSelector((state) => state.product);
+
+  const [filter, setFilter] = useState(searchParams.get("filter") || "");
+  const [sort, setSort] = useState(searchParams.get("sort") || "");
+  const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page")) || 1);
   const [isGridView, setIsGridView] = useState(true);
-  const [itemsPerPage, setItemsPerPage] = useState(window.innerWidth < 768 ? 4 : 12);
-
-  const [pendingCategory, setPendingCategory] = useState("All");
-  const [pendingType, setPendingType] = useState("All");
-  const [pendingPriceRange, setPendingPriceRange] = useState("All");
-
-  const [sortBy, setSortBy] = useState("Popularity");
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [activeType, setActiveType] = useState("All");
-  const [activePriceRange, setActivePriceRange] = useState("All");
+  
+  const [limit, setLimit] = useState(window.innerWidth < 768 ? 4 : 25);
 
   useEffect(() => {
+    const params = {};
+    if (filter) params.filter = filter;
+    if (sort) params.sort = sort;
+    if (currentPage > 1) params.page = currentPage;
+
+    setSearchParams(params);
+  }, [filter, sort, currentPage, setSearchParams]);
+
+  useEffect(() => {
+    const offset = (currentPage - 1) * limit;
+
+    const apiSort = sort ? sort.replace("-", ":") : "";
+    dispatch(getProducts(categoryId, filter, apiSort, limit, offset));
+  }, [dispatch, categoryId, filter, sort, currentPage, limit]);
+
+  
+  useEffect(() => {
     const handleResize = () => {
-      setItemsPerPage(window.innerWidth < 768 ? 4 : 12);
+      const newLimit = window.innerWidth < 768 ? 4 : 25;
+      setLimit((prevLimit) => {
+        if (prevLimit !== newLimit) {
+          setCurrentPage(1); 
+          return newLimit;
+        }
+        return prevLimit;
+      });
     };
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const { data: products, isLoading } = useQuery({
-    queryKey: ["shopProducts"],
-    queryFn: async () => {
-      const { data } = await axios.get("/data.json");
-      return data.productCardSection.productsCard;
-    },
-    staleTime: 1000 * 60 * 10,
-  });
-
-  const handleApplyFilter = () => {
-    setActiveCategory(pendingCategory);
-    setActiveType(pendingType);
-    setActivePriceRange(pendingPriceRange);
+  const handleFilterChange = useCallback((newFilter) => {
+    setFilter(newFilter);
     setCurrentPage(1);
-  };
+  }, []);
 
-  const handleResetFilter = () => {
-    setPendingCategory("All");
-    setPendingType("All");
-    setPendingPriceRange("All");
-    setSortBy("Popularity");
-    setActiveCategory("All");
-    setActiveType("All");
-    setActivePriceRange("All");
+  const handleSortChange = useCallback((newSort) => {
+    setSort(newSort);
     setCurrentPage(1);
-  };
+  }, []);
 
-  const filteredAndSorted = [...(products || [])]
-    .filter((product) => {
-      const matchCategory =
-        activeCategory === "All" ||
-        product.category === activeCategory.toLowerCase();
-      const matchType =
-        activeType === "All" ||
-        product.type === activeType.toLowerCase();
-      const price = parseFloat(product.price.new);
-      const matchPrice =
-        activePriceRange === "All" ||
-        (activePriceRange === "0-$10" && price <= 10) ||
-        (activePriceRange === "$10-$20" && price > 10 && price <= 20) ||
-        (activePriceRange === "$20-$50" && price > 20 && price <= 50) ||
-        (activePriceRange === "$50+" && price > 50);
-      return matchCategory && matchType && matchPrice;
-    })
-    .sort((a, b) => {
-      switch (sortBy) {
-        case "Newest":
-          return Number(b.id) - Number(a.id);
-        case "Price: Low to High":
-          return parseFloat(a.price.new) - parseFloat(b.price.new);
-        case "Price: High to Low":
-          return parseFloat(b.price.new) - parseFloat(a.price.new);
-        default:
-          return 0;
-      }
-    });
-
-  const totalPages = Math.ceil(filteredAndSorted.length / itemsPerPage);
-  const currentProducts = filteredAndSorted.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  const totalPages = Math.ceil(total / limit);
 
   return (
     <>
       <ShopNavbar />
       <ShopCard />
       <FilterCard
-        totalResults={filteredAndSorted.length}
         isGridView={isGridView}
         setIsGridView={setIsGridView}
-        pendingCategory={pendingCategory}
-        setPendingCategory={setPendingCategory}
-        pendingType={pendingType}
-        setPendingType={setPendingType}
-        sortBy={sortBy}  
-        setSortBy={setSortBy}
-        pendingPriceRange={pendingPriceRange}
-        setPendingPriceRange={setPendingPriceRange}
-        onApplyFilter={handleApplyFilter}
-        onResetFilter={handleResetFilter}
+        totalResults={total}
+        filter={filter}
+        setFilter={handleFilterChange}
+        sort={sort}
+        setSortBy={handleSortChange}
       />
-      <ShopProductCard
-        products={currentProducts}
-        loading={isLoading}
-        isGridView={isGridView}
-      />
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        setCurrentPage={setCurrentPage}
-      />
+
+      <main className="min-h-100">
+        {fetchState === "FETCHING" ? (
+          <div className="flex justify-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-color"></div>
+          </div>
+        ) : fetchState === "FAILED" ? (
+          <div className="flex justify-center py-20">
+            <p className="text-red-500">Failed to load products. Please try again.</p>
+          </div>
+        ) : products.length === 0 ? (
+          <div className="flex justify-center py-20">
+            <p className="text-gray-500">No products found.</p>
+          </div>
+        ) : (
+          <ShopProductCard products={products} isGridView={isGridView} />
+        )}
+
+        {total > 0 && (
+          <div className="flex justify-center py-10">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              setCurrentPage={setCurrentPage}
+            />
+          </div>
+        )}
+      </main>
+      
       <Client />
     </>
   );

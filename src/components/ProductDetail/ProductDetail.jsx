@@ -10,31 +10,52 @@ import { FaStar } from "react-icons/fa";
 import { FaStarHalfAlt } from "react-icons/fa";
 import { CiStar } from "react-icons/ci";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_TO_FAVORITES, getProductDetail } from "../../store/actions/productActions";
+import { addToCart } from "../../store/actions/shoppingCartActions";
 
 const ProductDetail = () => {
-  const { id } = useParams();
+  const { productId } = useParams();
+  const dispatch = useDispatch();
+ 
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  const { data: product, isLoading, error } = useQuery({
-  queryKey: ["product", id],
-  queryFn: async () => {
-    const { data } = await axios.get("/data.json");
-    const product = data.productCardSection.productsCard.find((p) => p.id === id);
-    if (!product) throw new Error("Product not found");
-    return product;
-  },
-  staleTime: 1000 * 60 * 10,
-});
+  const product = useSelector((state) => state.product.selectedProduct);
+  const fetchState = useSelector((state) => state.product.fetchState);
+  const favorites = useSelector((state) => state.product.addToFavorites);
+  const isFavorite = favorites?.some(fav => fav.id === product?.id);
 
-  if (isLoading) return <div className="text-center py-20">Loading...</div>;
-  if (error) return <div className="text-center py-20 text-red-500">Error loading product</div>;
+  useEffect(() => {
+    dispatch(getProductDetail(productId));
+  }, [dispatch, productId]);
+  
+  if (fetchState === "FETCHING") {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+      </div>
+    );
+  }
+
   if (!product) return <div className="text-center py-20">Product not found</div>;
 
-  const images = Array.isArray(product.images) ? product.images : [product.images];
+  const images = Array.isArray(product.images) ? product.images : [];
 
+  const handleAction = (iconName, productData) => {
+      switch (iconName) {
+        case "Heart":
+          dispatch({ type: ADD_TO_FAVORITES, payload: productData });
+          break;
+        case "ShoppingCart":
+          dispatch(addToCart(productData));
+          break;
+        case "Eye":
+          break;
+        default:
+          break;
+      }
+  };
 
   return (
     <main className="w-full bg-thin-white">
@@ -51,9 +72,9 @@ const ProductDetail = () => {
             </button>
             <div className="h-full w-full overflow-hidden rounded-lg xl:w-full">
               <img
-                className="w-full h-full object-cover object-top"
-                src={images[activeImageIndex]}
-                alt={product.title}
+                className="w-full h-full object-contain object-top"
+                src={images[activeImageIndex]?.url}
+                alt={product.name}
               />
             </div>
             <button
@@ -76,7 +97,7 @@ const ProductDetail = () => {
                     idx === activeImageIndex ? "opacity-100 border-2 border-primary-color" : "opacity-50"
                   }`}
                 >
-                  <img className="w-full h-full object-contain" src={img} alt="" />
+                  <img className="w-full h-full object-contain" src={img.url} alt="" />
                 </div>
               ))}
             </div>
@@ -84,7 +105,7 @@ const ProductDetail = () => {
         </article>
         <article className="font-montserrat flex flex-col gap-7 px-4 xl:flex-1">
           <h4 className="font-normal text-xl leading-8 text-text-color">
-            {product.title}
+            {product.name}
           </h4>
           <div className="flex items-center gap-2.5">
             <div className="flex gap-1.5">
@@ -95,18 +116,21 @@ const ProductDetail = () => {
               <CiStar size={22} color="#F3CD03" />
             </div>
             <h6 className="font-bold text-sm leading-6 text-second-text-color">
-              {product.reviews} Reviews
+              {product.rating}
+            </h6>
+            <h6 className="font-bold text-sm leading-6 text-second-text-color border-l pl-3">
+              {product.sell_count} Sales
             </h6>
           </div>
           <h5 className="font-bold text-2xl leading-8 text-text-color">
-            ${product.price.new}
+            ${product.price}
           </h5>
           <div className="flex gap-2.5">
             <h6 className="font-bold text-sm leading-6 text-second-text-color">
               Availability :
             </h6>
             <h6 className="font-bold text-sm leading-6 text-primary-color">
-              In Stock{" "}
+              {product.stock > 0 ? `In Stock (${product.stock})` : 'Out of Stock'}
             </h6>
           </div>
           <p className="font-normal text-sm leading-6 text-custom-gray">
@@ -126,12 +150,21 @@ const ProductDetail = () => {
               </h6>
             </a>
             <div className="flex justify-center items-center gap-2">
-              {[Heart, ShoppingCart, Eye].map((Icon, idx) => (
+              {[
+                { icon: Heart, name: "Heart", color: isFavorite ? "red" : "currentColor", fill: isFavorite ? "red" : "none" },
+                { icon: ShoppingCart, name: "ShoppingCart" },
+                { icon: Eye, name: "Eye" }
+              ].map((item, idx) => (
                 <button
                   key={idx}
-                  className="rounded-full w-10 border border-[#E8E8E8] bg-white p-2 hover:bg-gray-100 transition-colors shadow-md"
+                  onClick={() => handleAction(item.name, product)}
+                  className="rounded-full w-10 h-10 border border-[#E8E8E8] bg-white flex items-center justify-center hover:bg-gray-100 transition-all shadow-sm active:scale-90"
                 >
-                  <Icon size={20} />
+                  <item.icon 
+                    size={20} 
+                    color={item.name === "Heart" ? item.color : "currentColor"} 
+                    fill={item.name === "Heart" ? item.fill : "none"} 
+                  />
                 </button>
               ))}
             </div>

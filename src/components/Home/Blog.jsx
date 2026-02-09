@@ -11,7 +11,7 @@ import { LiaChartAreaSolid } from "react-icons/lia";
 import { FaChartArea } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getDataInfo } from "../../store/slices/dataInfoSlice";
+import { getDataInfo } from "../../store/actions/dataActions";
 import { useNavigate } from "react-router-dom";
 
 const Blog = () => {

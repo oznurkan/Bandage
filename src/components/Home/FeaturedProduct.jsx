@@ -3,7 +3,7 @@ import { VscBook } from "react-icons/vsc";
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getDataInfo } from "../../store/slices/dataInfoSlice";
+import { getDataInfo } from "../../store/actions/dataActions";
 
 const FeaturedProduct = () => {
   const dispatch = useDispatch();

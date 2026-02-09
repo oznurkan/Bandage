@@ -1,19 +1,17 @@
 import {
-  Search,
-  ShoppingCart,
   X,
   Phone,
   Mail,
-  Heart,
   ChevronDown,
+  Menu,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDataInfo } from "../../store/slices/dataInfoSlice";
+import { getDataInfo } from "../../store/actions/dataActions";
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
-import { IoMdPerson, IoMdPersonAdd } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import SharedActions from "./SharedActions";
+import { getCategories } from "../../store/actions/productActions";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,9 +21,20 @@ const Header = () => {
   const dispatch = useDispatch();
   const { content, loading, error } = useSelector((state) => state.appData);
 
+  const user = useSelector((state) => state.client.user);
+  const cart = useSelector((state) => state.shoppingCart.cart);
+  const categories = useSelector((state) => state.product.categories);
+  const isLoggedIn = user && user.email;
+
+  const cartItemCount = cart.reduce((total, item) => total + item.count, 0);
+
   useEffect(() => {
     if (!content) dispatch(getDataInfo());
   }, [dispatch, content]);
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -122,11 +131,12 @@ const Header = () => {
                         key={link}
                         className="relative group"
                         aria-label={`go to ${link}`}
-                        onClick={() => navigate("/shop")}
                         onMouseEnter={() => setIsShopOpen(true)}
                         onMouseLeave={() => setIsShopOpen(false)}
                       >
-                        <button className="flex items-end capitalize gap-1 hover:text-text-color transition-colors py-2">
+                        <button
+                        onClick={() => navigate("/shop")} 
+                        className="flex items-end capitalize gap-1 hover:text-text-color transition-colors py-2">
                           {link}
                           <ChevronDown
                             size={14}
@@ -134,25 +144,53 @@ const Header = () => {
                           />
                         </button>
                         {isShopOpen && (
-                          <div className="absolute top-full left-0 w-48 bg-white shadow-xl border border-gray-100 rounded-md py-4 z-50">
-                            <a
-                              href="/shop/men"
-                              className="block px-4 py-2 hover:bg-gray-50 hover:text-primary-color"
-                            >
-                              Men
-                            </a>
-                            <a
-                              href="/shop/women"
-                              className="block px-4 py-2 hover:bg-gray-50 hover:text-primary-color"
-                            >
-                              Women
-                            </a>
-                            <a
-                              href="/shop/accessories"
-                              className="block px-4 py-2 hover:bg-gray-50 hover:text-primary-color"
-                            >
-                              Accessories
-                            </a>
+                          <div className="absolute top-full left-0 min-w-100 bg-white shadow-2xl border border-gray-100 rounded-lg p-6 z-50 flex gap-10">
+                            <div className="flex-1">
+                              <h3 className="font-extrabold text-text-color mb-3 border-b pb-1 text-base">
+                                Kadın
+                              </h3>
+                              <div className="space-y-1">
+                                {categories
+                                .filter((cat) => cat.code.startsWith("k:"))
+                                .map((cat) => (
+                                  <button
+                                    key={cat.id}
+                                    onClick={() => {
+                                      navigate(
+                                        `/shop/kadin/${cat.code.split(":")[1]}/${cat.id}`
+                                      );
+                                      setIsShopOpen(false);
+                                    }}
+                                    className="block w-full text-left px-2 py-1.5 text-sm hover:bg-primary-color/10 hover:text-primary-color rounded transition-colors"
+                                  >
+                                    {cat.title}
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="font-extrabold text-text-color mb-3 border-b pb-1 text-base">
+                                Erkek
+                              </h3>
+                              <div className="space-y-1">
+                                {categories
+                                  .filter((cat) => cat.gender === "e")
+                                  .map((cat) => (
+                                    <button
+                                      key={cat.id}
+                                      onClick={() => {
+                                        navigate(
+                                          `/shop/erkek/${cat.code.split(":")[1]}/${cat.id}`,
+                                        );
+                                        setIsShopOpen(false);
+                                      }}
+                                      className="block w-full text-left px-2 py-1.5 text-sm hover:bg-primary-color/10 hover:text-primary-color rounded transition-colors"
+                                    >
+                                      {cat.title}
+                                    </button>
+                                  ))}
+                              </div>
+                            </div>
                           </div>
                         )}
                       </a>
@@ -177,8 +215,11 @@ const Header = () => {
                 <article className="hidden xl:flex">
                   <SharedActions
                     header={header}
+                    user={user}
+                    isLoggedIn={isLoggedIn}
                     isSearchOpen={isSearchOpen}
                     setIsSearchOpen={setIsSearchOpen}
+                    cartItemCount={cartItemCount}
                   />
                 </article>
               )}
@@ -189,11 +230,7 @@ const Header = () => {
                 {isMenuOpen ? (
                   <X size={24} className="text-text-color" />
                 ) : (
-                  <div className="flex w-6 h-6 flex-col items-end justify-evenly">
-                    <span className="h-0.5 w-full bg-text-color"></span>
-                    <span className="h-0.5 w-[75%] bg-text-color"></span>
-                    <span className="h-0.5 w-[50%] bg-text-color"></span>
-                  </div>
+                  <Menu size={27} className="text-text-color" />
                 )}
               </button>
             </section>
@@ -214,10 +251,13 @@ const Header = () => {
                 ))}
               </nav>
               <SharedActions
-                isMobile
                 header={header}
+                user={user}
+                isLoggedIn={isLoggedIn}
                 isSearchOpen={isSearchOpen}
                 setIsSearchOpen={setIsSearchOpen}
+                isMobile={true}
+                cartItemCount={cartItemCount}
               />
             </article>
           )}

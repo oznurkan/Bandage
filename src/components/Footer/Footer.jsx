@@ -2,7 +2,7 @@ import { RiFacebookCircleFill } from "react-icons/ri";
 import { FaInstagram, FaTwitter } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDataInfo } from "../../store/slices/dataInfoSlice";
+import { getDataInfo } from "../../store/actions/dataActions";
 
 const Footer = () => {
   const [email, setEmail] = useState("");

@@ -4,7 +4,14 @@ import CustomSelect from "./CustomSelect";
 import FilterDrawer from "./FilterDrawer";
 
 const FilterCard = ({
+  isGridView,
+  setIsGridView,
   totalResults,
+  filter,
+  setFilter,
+  sort,
+  setSortBy,
+ /* totalResults,
   isGridView,
   setIsGridView,
   pendingCategory,
@@ -16,7 +23,7 @@ const FilterCard = ({
   pendingPriceRange,
   setPendingPriceRange,
   onApplyFilter,
-  onResetFilter,
+  onResetFilter,*/
 }) => {
   return (
     <section className="w-full">
@@ -46,8 +53,17 @@ const FilterCard = ({
         </div>
 
         <div className="flex items-center py-1 gap-4 flex-wrap justify-center">
-          <CustomSelect sortBy={sortBy} setSortBy={setSortBy} />
-          <FilterDrawer
+          <CustomSelect sortBy={sort} setSortBy={setSortBy} />
+          <input
+            type="text"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            placeholder="Filter by name..."
+            className="border border-[#E8E8E8] bg-[#F9F9F9] rounded-md px-4 py-3 font-normal focus:outline-primary-color"
+          />
+          {/*
+            <FilterDrawer
+            
             onApply={onApplyFilter}
             onReset={onResetFilter}
             pendingCategory={pendingCategory}
@@ -57,6 +73,8 @@ const FilterCard = ({
             pendingPriceRange={pendingPriceRange}
             setPendingPriceRange={setPendingPriceRange}
           />
+
+         */ } 
         </div>
       </article>
     </section>

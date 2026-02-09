@@ -642,5 +642,168 @@
                 "subtitle": "items"
             }
         ]
+    },
+    "contactSection": {
+        "title": "WORK WITH US",
+        "subtitle": "Now Let’s grow Yours",
+        "paragraph": "The gradual accumulation of information about atomic and small-scale behavior during the first quarter of the 20th",
+        "buttonText": "Contact us",
+        "images": "/assets/shopPage/images_3.jpg",
+        "contactHeader": {
+            "title" : "CONTACT US",
+            "subtitle": "Get in touch today!",
+            "paragraph": "We know how large objects will act, but things on a small scale just do not act that way.",
+            "contact": [
+                {
+                    "id": "1",
+                    "name": "Phone",
+                    "number": "+451 215 215"
+                },
+                {
+                    "id": "2",
+                    "name": "Fax",
+                    "number": "+451 215 215"
+                }
+            ],
+            "images":"/assets/contact/images.png" 
+        },
+        "contactText": {
+            "title" : "VISIT OUR OFFICE",
+            "subtitle": "We help small businesses with big ideas",
+            "contact": [
+                {
+                    "id": "1",
+                    "link1": "georgia.young@example.com",
+                    "link2": "georgia.young@ple.com",
+                    "text": "Get Support",
+                    "buttonText": "Submit Request"
+                },
+                {
+                    "id": "2",
+                    "link1": "georgia.young@example.com",
+                    "link2": "georgia.young@ple.com",
+                    "text": "Get Support",
+                    "buttonText": "Submit Request"
+                },
+                {
+                    "id": "3",
+                    "link1": "georgia.young@example.com",
+                    "link2": "georgia.young@ple.com",
+                    "text": "Get Support",
+                    "buttonText": "Submit Request"
+                }
+            ]
+        },
+        "contactCta": {
+            "title": "WE Can't WAIT TO MEET YOU",
+            "subtitle": "Let’s Talk",
+            "buttonText": "Try it free now"
+        }
+
+    },
+    "teamSection": {
+        "title": "Meet Our Team",
+        "paragraph": "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics ",
+        "team":[
+            {
+                "id":"1",
+                "images":"/assets/team/images_1.png",
+                "name": "Devon Lane",
+                "position": "Founder",
+                "text": "the quick fox jumps over the lazy dog"
+            },
+            {
+                "id":"2",
+                "images":"/assets/team/images_2.png",
+                "name": "Savannah Nguyen",
+                "position": "Founder",
+                "text": "the quick fox jumps over the lazy dog"
+            },
+            {
+                "id":"3",
+                "images":"/assets/team/images_3.png",
+                "name": "Kristin Watson",
+                "position": "Full-stack Developer",
+                "text": "the quick fox jumps over the lazy dog"
+            },
+            {
+                "id":"4",
+                "images":"/assets/team/images_4.png",
+                "name": "Floyd Miles",
+                "position": "Back-end Developer",
+                "text": "the quick fox jumps over the lazy dog"
+            },
+            {
+                "id":"5",
+                "images":"/assets/team/images_5.png",
+                "name": "Jerome Bell",
+                "position": "Back-end Developer",
+                "text": "the quick fox jumps over the lazy dog"
+            },
+            {
+                "id":"6",
+                "images":"/assets/team/images_6.png",
+                "name": "Jane Cooper",
+                "position": "Front-end Developer",
+                "text": "the quick fox jumps over the lazy dog"
+            },
+            {
+                "id":"7",
+                "images":"/assets/team/images_7.jpg",
+                "name": "Albert Flores",
+                "position": "Front-end Developer",
+                "text": "the quick fox jumps over the lazy dog"
+            },
+            {
+                "id":"8",
+                "images":"/assets/team/images_8.jpg",
+                "name": "Öznur Kan",
+                "position": "Software Engineer",
+                "text": "the quick fox jumps over the lazy dog"
+            }
+        ],
+        "teamHeader": [ "/assets/team/teamHeader/images_1.jpg", "/assets/team/teamHeader/images_2.jpg", "/assets/team/teamHeader/images_3.jpg", "/assets/team/teamHeader/images_4.jpg", "/assets/team/teamHeader/images_5.jpg"],
+        "teamCta":{
+            "title": "Start your 14 days free trial",
+            "paragraph": "Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent.",
+            "buttonText": "Try it free now"
+        }
+    },
+    "aboutSection": {
+        "aboutHeader": {
+            "title": "ABOUT US",
+            "subtitle": "ABOUT COMPANY",
+            "paragraph": "We know how large objects will act, but things on a small scale just do not act that way.",
+            "buttonText": "Get Quote Now",
+            "images": "/assets/about/images.png"
+        },
+        "aboutContent": {
+            "title": "Problems trying",
+            "subtitle": "Met minim Mollie non desert Alamo est sit cliquey dolor do met sent.",
+            "paragraph": "Problems trying to resolve the conflict between the two major realms of Classical physics: Newtonian mechanics "
+        },
+        "aboutStats": [
+            {
+                "id": "1",
+                "name": "15k",
+                "text": "Happy Customers"
+            },
+            {
+                "id": "2",
+                "name": "150K",
+                "text": "Monthly Visitors"
+            },
+            {
+                "id": "3",
+                "name": "15",
+                "text": "Countries  Worldwide"
+            },
+            {
+                "id": "4",
+                "name": "100+",
+                "text": "Top Partners"
+            }
+        ],
+        "aboutVideos": "/assets/about/images_2.jpg"
     }
 }
