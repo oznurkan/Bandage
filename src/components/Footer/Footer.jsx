@@ -13,8 +13,14 @@ const Footer = () => {
     if (!content) dispatch(getDataInfo());
   }, [dispatch, content]);
 
-  if (loading) return <div className="text-center py-10 font-montserrat">Yükleniyor...</div>;
-  if (error) return <div className="text-red-500 text-center py-10 font-montserrat">Hata: {error}</div>;
+  if (loading)
+    return <div className="text-center py-10 font-montserrat">Loading...</div>;
+  if (error)
+    return (
+      <div className="text-danger-color text-center py-10 font-montserrat">
+        Error: {error}
+      </div>
+    );
 
   const { footer } = content || {};
   if (!footer) return null;
@@ -28,7 +34,12 @@ const Footer = () => {
           <h3 className="font-bold text-2xl text-bold-blue">{footer.title}</h3>
           <div className="flex gap-5">
             {socialIcons.map((Icon, idx) => (
-              <Icon key={idx} size={24} color="#23A6F0" className="cursor-pointer hover:opacity-80" />
+              <Icon
+                key={idx}
+                size={24}
+                color="#23A6F0"
+                className="cursor-pointer hover:opacity-80"
+              />
             ))}
           </div>
         </article>
@@ -37,16 +48,26 @@ const Footer = () => {
         <article className="flex flex-col py-18 px-5 gap-8 mx-auto  md:w-[80%] xl:flex-row xl:w-[73%] xl:px-0">
           {footer.information.map((info) => (
             <div key={info.id} className="flex flex-col gap-5 xl:flex-1">
-              <h5 className="font-bold text-base text-bold-blue capitalize">{info.title}</h5>
+              <h5 className="font-bold text-base text-bold-blue capitalize">
+                {info.title}
+              </h5>
               <nav className="flex flex-col text-sm font-bold capitalize text-second-text-color gap-2.5">
                 {info.links.map((link, idx) => (
-                  <a key={idx} href={`#${link}`} className="hover:text-primary-blue">{link}</a>
+                  <a
+                    key={idx}
+                    href={`#${link}`}
+                    className="hover:text-primary-blue"
+                  >
+                    {link}
+                  </a>
                 ))}
               </nav>
             </div>
           ))}
           <div className="flex flex-col gap-5 xl:flex-2">
-            <h5 className="font-bold text-bold-blue capitalize">{footer.form.title}</h5>
+            <h5 className="font-bold text-bold-blue capitalize">
+              {footer.form.title}
+            </h5>
             <form className="flex flex-col gap-2">
               <div className="flex">
                 <input
@@ -68,7 +89,7 @@ const Footer = () => {
         </article>
       </section>
       <section className="bg-thin-white py-10">
-        <h6 className="w-[73%] mx-auto font-bold text-sm text-second-text-color text-center md:w-[80%] md:text-start capitalize">
+        <h6 className="w-[73%] mx-auto font-bold text-sm text-second-text-color text-center md:w-[80%] md:text-start xl:w-[73%] capitalize">
           {footer.text}
         </h6>
       </section>

@@ -2,10 +2,9 @@ import {
   SIGNUP_PENDING,
   SIGNUP_SUCCESS,
   SIGNUP_FAILED,
-  SIGNUP_RESET
+  SIGNUP_RESET,
 } from "../actions/actionTypes";
 import api from "../../api/api";
-
 
 const signupPending = () => ({
   type: SIGNUP_PENDING,
@@ -24,8 +23,6 @@ const signupFailed = (error) => ({
 export const signupReset = () => ({
   type: SIGNUP_RESET,
 });
-
-
 
 export const signupUser = (userData) => {
   return (dispatch) => {

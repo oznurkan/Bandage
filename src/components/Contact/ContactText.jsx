@@ -6,16 +6,18 @@ import { MapPin, Phone, Send } from "lucide-react";
 const ContactText = () => {
   const dispatch = useDispatch();
   const { content, loading, error } = useSelector((state) => state.appData);
-  const icons = [Phone, MapPin, Send ];
+  const icons = [Phone, MapPin, Send];
 
   useEffect(() => {
     if (!content) dispatch(getDataInfo());
   }, [dispatch, content]);
 
   if (loading)
-    return <div className="text-center py-10 font-bold">Yükleniyor...</div>;
+    return <div className="text-center py-10 font-bold">Loading...</div>;
   if (error)
-    return <div className="text-red-500 text-center py-10">Hata: {error}</div>;
+    return (
+      <div className="text-danger-color text-center py-10">Error: {error}</div>
+    );
 
   const { contactSection } = content || {};
   return (
@@ -61,7 +63,9 @@ const ContactText = () => {
                   </div>
                   <h5 className="font-bold text-base leading-6">{item.text}</h5>
 
-                  <button className="px-5 py-2.5 border border-primary-color text-primary-color rounded-2xl font-bold text-sm leading-6 hover:bg-primary-color hover:text-white transition-colors">
+                  <button 
+                  onClick={() => window.location.href = `mailto:info@example.com?subject=Contact US`}
+                  className="px-5 py-2.5 cursor-pointer border border-primary-color text-primary-color rounded-2xl font-bold text-sm leading-6 hover:bg-primary-color hover:text-white transition-colors">
                     {item.buttonText}
                   </button>
                 </div>

@@ -5,13 +5,3 @@ import reducers from "./reducers/index";
 
 export const store = createStore(reducers, applyMiddleware(thunk, logger));
 
-
-
-/*import { configureStore } from '@reduxjs/toolkit';
-import dataInfoReducer from './slices/dataInfoSlice';
-
-export const store = configureStore({
-  reducer: {
-    appData: dataInfoReducer, 
-  },
-}); */

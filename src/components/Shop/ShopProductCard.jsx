@@ -1,24 +1,34 @@
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { getProducts } from "../../store/actions/productActions";
-import { useDispatch } from "react-redux";
-
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ShopProductCard = ({ products, isGridView }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { gender, categoryName, categoryId } = useParams();
+  const categories = useSelector((state) => state.product.categories);
+
+  const location = useLocation();
+  const isHomePage = location.pathname === "/home";
 
   const handleProductClick = (product) => {
-    const nameSlug = product.name.toLowerCase().replaceAll(" ", "-");
-    navigate(`/shop/${gender}/${categoryName}/${categoryId}/${nameSlug}/${product.id}`);
-  };
+    const nameSlug = product.name
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/-+$/, "");
 
-  useEffect(() => {
-    if (!products || products.length === 0) {
-      dispatch(getProducts());
-    }
-  }, [dispatch, products]);
+    const productCategory = categories.find(
+      (cat) => cat.id === product.category_id,
+    );
+
+    const gender = productCategory?.gender === "k" ? "kadin" : "erkek";
+    const categoryTitle = productCategory?.title || "kategori";
+    const categoryId = product.category_id;
+    const productNameSlug = nameSlug;
+    const productId = product.id;
+
+    const detailLink = `/shop/${gender}/${categoryTitle}/${categoryId}/${productNameSlug}/${productId}`;
+
+    navigate(detailLink);
+  };
 
   return (
     <main className="w-full bg-white font-montserrat">
@@ -27,7 +37,7 @@ const ShopProductCard = ({ products, isGridView }) => {
           <article
             className={`mx-auto ${
               isGridView
-                ? "flex flex-wrap justify-start gap-9 md:w-[82%]"
+                ? "flex flex-wrap w-full justify-start gap-9 md:w-[80%]"
                 : "flex flex-col gap-6 md:w-[82%]"
             }`}
           >
@@ -36,14 +46,14 @@ const ShopProductCard = ({ products, isGridView }) => {
                 key={product.id}
                 className={
                   isGridView
-                    ? "flex flex-col items-center w-full mx-auto grow-0 md:w-[46%] lg:w-[30%] xl:w-[17%]"
+                    ? "flex flex-col items-center w-full mx-auto md:w-[46%] lg:w-[30%] xl:w-[17%] md:mx-0 "
                     : "flex flex-row items-center w-full border-b border-[#E8E8E8] pb-6 gap-6"
                 }
               >
                 <div
                   className={
                     isGridView
-                      ? "flex justify-center mx-auto items-center w-full h-107 "
+                      ? "flex justify-center mx-auto items-center w-full h-107 xl:h-70 "
                       : "flex justify-center items-center w-48 h-48 shrink-0 "
                   }
                 >
@@ -61,7 +71,10 @@ const ShopProductCard = ({ products, isGridView }) => {
                   }`}
                 >
                   <h5 className="text-base text-text-color">{product.name}</h5>
-                  <a onClick={() => handleProductClick(product)} className="text-sm cursor-pointer text-second-text-color">
+                  <a
+                    onClick={() => handleProductClick(product)}
+                    className="text-sm cursor-pointer text-second-text-color"
+                  >
                     {product.name}
                   </a>
                   <div
@@ -69,23 +82,23 @@ const ShopProductCard = ({ products, isGridView }) => {
                       isGridView ? "justify-center" : "justify-start"
                     }`}
                   >
-                    <span className="text-muted-color">
-                      ${product.price}
-                    </span>
+                    <span className="text-muted-color">${product.price}</span>
                     <span className="text-second-color-1">
                       ${product.price}
                     </span>
                   </div>
-                  <div
-                    className={`flex gap-1.5 ${
-                      isGridView ? "justify-center" : "justify-start"
-                    }`}
-                  >
-                    <a className="bg-primary-color size-4 rounded-full cursor-pointer hover:scale-110 transition-transform"></a>
-                    <a className="bg-second-color-1 size-4 rounded-full cursor-pointer hover:scale-110 transition-transform"></a>
-                    <a className="bg-alert-color size-4 rounded-full cursor-pointer hover:scale-110 transition-transform"></a>
-                    <a className="bg-dark-background-color size-4 rounded-full cursor-pointer hover:scale-110 transition-transform"></a>
-                  </div>
+                  {!isHomePage && (
+                    <div
+                      className={`flex gap-1.5 ${
+                        isGridView ? "justify-center" : "justify-start"
+                      }`}
+                    >
+                      <a className="bg-primary-color size-4 rounded-full cursor-pointer hover:scale-110 transition-transform"></a>
+                      <a className="bg-second-color-1 size-4 rounded-full cursor-pointer hover:scale-110 transition-transform"></a>
+                      <a className="bg-alert-color size-4 rounded-full cursor-pointer hover:scale-110 transition-transform"></a>
+                      <a className="bg-dark-background-color size-4 rounded-full cursor-pointer hover:scale-110 transition-transform"></a>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

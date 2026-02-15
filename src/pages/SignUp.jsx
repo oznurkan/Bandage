@@ -7,12 +7,13 @@ import { signupUser, signupReset } from "../store/actions/authActions";
 import { toast } from "react-toastify";
 
 const SignUp = () => {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const roles = useSelector((state) => state.client.roles);
-  const { signupLoading, signupError, signupSuccess } = useSelector((state) => state.auth);
+  const { signupLoading, signupError, signupSuccess } = useSelector(
+    (state) => state.auth,
+  );
 
   const [selectedRole, setSelectedRole] = useState("");
 
@@ -31,8 +32,7 @@ const SignUp = () => {
     },
   });
 
-   const formValues = watch();
-
+  const formValues = watch();
 
   const password = formValues.password;
   const roleId = formValues.role_id;
@@ -80,7 +80,7 @@ const SignUp = () => {
       name: formData.name,
       email: formData.email,
       password: formData.password,
-      role_id: Number(formData.role_id), 
+      role_id: Number(formData.role_id),
     };
 
     if (selectedRole === "store") {

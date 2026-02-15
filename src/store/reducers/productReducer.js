@@ -1,25 +1,25 @@
 import {
-    SET_CATEGORIES,
-    SET_PRODUCT_LIST,
-    SET_TOTAL,
-    SET_FETCH_STATE,
-    SET_LIMIT,
-    SET_OFFSET,
-    SET_FILTER,
-    SET_SELECTED_PRODUCT,
-    ADD_TO_FAVORITES
-} from "../actions/productActions";
+  SET_CATEGORIES,
+  SET_PRODUCT_LIST,
+  SET_TOTAL,
+  SET_FETCH_STATE,
+  SET_LIMIT,
+  SET_OFFSET,
+  SET_FILTER,
+  SET_SELECTED_PRODUCT,
+  ADD_TO_FAVORITES,
+} from "../actions/actionTypes";
 
 const initialState = {
-    categories: [],
-    productList: [],
-    total: 0,
-    limit: 25,
-    offset: 0,
-    filter: "",
-    selectedProduct: null,
-    addToFavorites:[],
-    fetchState: "NOT_FETCHED", // "NOT_FETCHED", "FETCHING", "FETCHED", "FAILED"
+  categories: [],
+  productList: [],
+  total: 0,
+  limit: 25,
+  offset: 0,
+  filter: "",
+  selectedProduct: null,
+  favoritesList: [],
+  fetchState: "NOT_FETCHED",
 };
 
 const productReducer = (state = initialState, action) => {
@@ -65,18 +65,29 @@ const productReducer = (state = initialState, action) => {
         ...state,
         filter: action.payload,
       };
-    
-    case SET_SELECTED_PRODUCT: 
+
+    case SET_SELECTED_PRODUCT:
       return { ...state, selectedProduct: action.payload };
 
-    case ADD_TO_FAVORITES:
-      if (state.addToFavorites.find(p => p.id === action.payload?.id)) {
-        return state;
+    case ADD_TO_FAVORITES: {
+      const existingProductIndex = state.favoritesList.findIndex(
+        (p) => Number(p.id) === Number(action.payload?.id),
+      );
+
+      if (existingProductIndex !== -1) {
+        return {
+          ...state,
+          favoritesList: state.favoritesList.filter(
+            (p) => Number(p.id) !== Number(action.payload.id),
+          ),
+        };
       }
+
       return {
         ...state,
-        addToFavorites: [...state.addToFavorites, action.payload]
+        favoritesList: [...state.favoritesList, action.payload],
       };
+    }
     default:
       return state;
   }

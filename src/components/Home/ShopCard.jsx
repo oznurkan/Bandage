@@ -36,8 +36,9 @@ const ShopCard = () => {
                     {shopCardSection.shopCards[0].text}
                   </h3>
                   <button
-                   onClick={() => navigate("/shop")}
-                   className="py-4 px-10 gap-2.5 uppercase cursor-pointer rounded-xs text-white border border-white font-montserrat font-bold transition-all duration-300 ease-in-out hover:bg-white hover:text-text-color text-sm leading-6">
+                    onClick={() => navigate("/shop")}
+                    className="py-4 px-10 gap-2.5 uppercase cursor-pointer rounded-xs text-white border border-white font-montserrat font-bold transition-all duration-300 ease-in-out hover:bg-white hover:text-text-color text-sm leading-6"
+                  >
                     {shopCardSection.shopCards[0].buttonText}
                   </button>
                 </div>
@@ -55,9 +56,10 @@ const ShopCard = () => {
                     <h3 className="font-montserrat capitalize font-bold text-2xl leading-8 text-white">
                       {shop.text}
                     </h3>
-                    <button 
-                    onClick={() => navigate("/shop")}
-                    className="py-4 px-10 gap-2.5 uppercase cursor-pointer rounded-xs text-white border border-white font-montserrat font-bold text-sm leading-6 transition-all duration-300 ease-in-out hover:bg-white hover:text-text-color">
+                    <button
+                      onClick={() => navigate("/shop")}
+                      className="py-4 px-10 gap-2.5 uppercase cursor-pointer rounded-xs text-white border border-white font-montserrat font-bold text-sm leading-6 transition-all duration-300 ease-in-out hover:bg-white hover:text-text-color"
+                    >
                       {shop.buttonText}
                     </button>
                   </div>

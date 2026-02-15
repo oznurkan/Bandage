@@ -23,9 +23,8 @@ const Blog = () => {
     if (!content) dispatch(getDataInfo());
   }, [dispatch, content]);
 
-  if (loading) return <div className="text-center py-10">Yükleniyor...</div>;
-  if (error)
-    return <div className="text-red-500 text-center py-10">Hata: {error}</div>;
+  if (loading) return <div className="text-center py-10">Loading...</div>;
+  if (error) return <div className="text-red-500 text-center py-10">Hata</div>;
   const { blogSection } = content || {};
 
   return (
@@ -54,7 +53,6 @@ const Blog = () => {
                   <div className="absolute w-full flex justify-center items-center z-10 bottom-5 gap-3">
                     {[Heart, ShoppingCart, Eye].map((Icon, idx) => (
                       <button
-
                         key={idx}
                         className="rounded-full bg-white p-2 hover:bg-gray-100 transition-colors shadow-md"
                       >
@@ -99,7 +97,7 @@ const Blog = () => {
                   </div>
                   <div className="flex gap-5 justify-start">
                     <span className="font-montserrat font-bold text-base leading-6 text-muted-color flex gap-1">
-                     <span>${blog.price.old} </span>
+                      <span>${blog.price.old} </span>
                     </span>
                     <span className="font-montserrat font-bold text-base leading-6 text-second-color-1 flex gap-1">
                       <span>${blog.price.new}</span>
@@ -132,9 +130,10 @@ const Blog = () => {
                       </p>
                     </button>
                   </div>
-                  <a 
-                  onClick={() => navigate("/blog")}
-                  className="flex gap-2 py-2.5 px-3 cursor-pointer rounded-4xl w-fit xl:border text-second-text-color xl:text-sm xl:text-primary-color xl:border-primary-blue transition-all duration-300 ease-in-out hover:bg-primary-color hover:text-white">
+                  <a
+                    onClick={() => navigate("/blog")}
+                    className="flex gap-2 py-2.5 px-3 cursor-pointer rounded-4xl w-fit xl:border text-second-text-color xl:text-sm xl:text-primary-color xl:border-primary-blue transition-all duration-300 ease-in-out hover:bg-primary-color hover:text-white"
+                  >
                     <h6 className="font-bold text-xs capitalize leading-6  ">
                       {blog.buttonText}
                     </h6>

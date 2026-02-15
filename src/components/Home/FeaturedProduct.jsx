@@ -14,7 +14,8 @@ const FeaturedProduct = () => {
   }, [dispatch, content]);
 
   if (loading) return <div className="text-center py-10">Yükleniyor...</div>;
-  if (error) return <div className="text-red-500 text-center py-10">Hata: {error}</div>;
+  if (error)
+    return <div className="text-red-500 text-center py-10">Hata: {error}</div>;
 
   const { featuresProductSection } = content || {};
 
@@ -40,12 +41,12 @@ const FeaturedProduct = () => {
               const IconComponent = icons[index];
 
               return (
-                <div 
-                  key={feature.id} 
+                <div
+                  key={feature.id}
                   className="flex flex-col items-center text-center py-9 px-10 gap-5 xl:flex-1"
                 >
                   {IconComponent && <IconComponent size={72} color="#23A6F0" />}
-                  
+
                   <h3 className="font-bold text-2xl leading-8 text-text-color">
                     {feature.title}
                   </h3>

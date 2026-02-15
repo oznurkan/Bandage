@@ -2,11 +2,11 @@ import {
   SIGNUP_PENDING,
   SIGNUP_SUCCESS,
   SIGNUP_FAILED,
-  SIGNUP_RESET
+  SIGNUP_RESET,
 } from "../actions/actionTypes";
 
 const initialState = {
-  data:{},
+  data: {},
   signupLoading: false,
   signupError: null,
   signupSuccess: false,
@@ -28,7 +28,7 @@ const authReducer = (state = initialState, action) => {
         signupLoading: false,
         signupError: null,
         signupSuccess: true,
-        data: action.payload
+        data: action.payload,
       };
 
     case SIGNUP_FAILED:

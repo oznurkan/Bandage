@@ -14,8 +14,7 @@ const ShopPage = () => {
   const dispatch = useDispatch();
   const { categoryId } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-
-
+  
   const { productList: products, fetchState, total } = useSelector((state) => state.product);
 
   const [filter, setFilter] = useState(searchParams.get("filter") || "");
@@ -23,7 +22,7 @@ const ShopPage = () => {
   const [currentPage, setCurrentPage] = useState(Number(searchParams.get("page")) || 1);
   const [isGridView, setIsGridView] = useState(true);
   
-  const [limit, setLimit] = useState(window.innerWidth < 768 ? 4 : 25);
+  const [limit, setLimit] = useState(window.innerWidth < 1280 ? 24 : 25);
 
   useEffect(() => {
     const params = {};
@@ -32,19 +31,20 @@ const ShopPage = () => {
     if (currentPage > 1) params.page = currentPage;
 
     setSearchParams(params);
-  }, [filter, sort, currentPage, setSearchParams]);
+  }, [filter, sort, currentPage, setSearchParams, categoryId]);
 
   useEffect(() => {
     const offset = (currentPage - 1) * limit;
 
     const apiSort = sort ? sort.replace("-", ":") : "";
     dispatch(getProducts(categoryId, filter, apiSort, limit, offset));
+    window.scrollTo({ top: 750, behavior: "smooth" });
   }, [dispatch, categoryId, filter, sort, currentPage, limit]);
 
   
   useEffect(() => {
     const handleResize = () => {
-      const newLimit = window.innerWidth < 768 ? 4 : 25;
+      const newLimit = window.innerWidth < 1280 ? 24 : 25;
       setLimit((prevLimit) => {
         if (prevLimit !== newLimit) {
           setCurrentPage(1); 

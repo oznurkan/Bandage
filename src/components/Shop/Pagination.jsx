@@ -13,8 +13,8 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
 
   const getVisiblePages = () => {
     const allPages = [...Array(totalPages)].map((_, i) => i + 1);
-    
-    const visibleCount = isMobile ? 3 : 10; 
+
+    const visibleCount = isMobile ? 3 : 10;
     const half = Math.floor(visibleCount / 2);
 
     let start = currentPage - half;
@@ -33,38 +33,9 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
   };
 
   const visiblePages = getVisiblePages();
-  
 
   const showStartDots = visiblePages[0] > 1;
   const showEndDots = visiblePages[visiblePages.length - 1] < totalPages;
-
- /* const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  if (totalPages <= 1) return null;
-
-  const getVisiblePages = () => {
-    const allPages = [...Array(totalPages)].map((_, i) => i + 1);
-
-    if (!isMobile) return allPages;
-    if (currentPage <= 2) {
-      return allPages.slice(0, 3);
-    }
-    if (currentPage >= totalPages - 1) {
-      return allPages.slice(totalPages - 4);
-    }
-    return allPages.slice(currentPage - 2, currentPage + 2);
-  };
-
-  const visiblePages = getVisiblePages();
-  const showStartDots = isMobile && visiblePages[0] > 1;
-  const showEndDots =
-    isMobile && visiblePages[visiblePages.length - 1] < totalPages;*/
 
   return (
     <div className="flex justify-center items-center my-16 font-montserrat shadow-sm rounded-md w-fit mx-auto border border-[#E8E8E8] overflow-hidden">

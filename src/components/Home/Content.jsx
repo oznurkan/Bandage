@@ -10,8 +10,10 @@ const Content = () => {
     if (!content) dispatch(getDataInfo());
   }, [dispatch, content]);
 
-  if (loading) return <div className="text-center py-10 font-bold">Yükleniyor...</div>;
-  if (error) return <div className="text-red-500 text-center py-10">Hata: {error}</div>;
+  if (loading)
+    return <div className="text-center py-10 font-bold">Yükleniyor...</div>;
+  if (error)
+    return <div className="text-red-500 text-center py-10">Hata: {error}</div>;
 
   const { contentSection } = content || {};
 
@@ -26,7 +28,7 @@ const Content = () => {
             <h2 className="font-bold text-3xl md:text-[40px] leading-tight text-text-color">
               {contentSection.title}
             </h2>
-            
+
             <div className="flex flex-col gap-4 text-second-text-color text-sm leading-5">
               {Object.values(contentSection.paragraph).map((text, index) => (
                 <p key={index}>{text}</p>
@@ -35,17 +37,17 @@ const Content = () => {
           </article>
           <article className="flex w-full gap-3 mx-auto px-3 md:w-[70%]  xl:flex-1">
             <div className="flex-1 h-90.75 xl:h-124.5 overflow-hidden rounded-lg">
-              <img 
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" 
-                src={contentSection.images_1} 
-                alt="Content Visual 1" 
+              <img
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                src={contentSection.images_1}
+                alt="Content Visual 1"
               />
             </div>
             <div className="flex-1 h-90.75 xl:h-124.5 overflow-hidden rounded-lg">
-              <img 
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" 
-                src={contentSection.images_2} 
-                alt="Content Visual 2" 
+              <img
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                src={contentSection.images_2}
+                alt="Content Visual 2"
               />
             </div>
           </article>

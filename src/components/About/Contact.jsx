@@ -11,9 +11,9 @@ const Contact = () => {
   }, [dispatch, content]);
 
   if (loading)
-    return <div className="text-center py-10 font-bold">Yükleniyor...</div>;
+    return <div className="text-center py-10 font-bold">Loading...</div>;
   if (error)
-    return <div className="text-red-500 text-center py-10">Hata: {error}</div>;
+    return <div className="text-danger-color text-center py-10">Error: {error}</div>;
 
   const { contactSection } = content || {};
 
@@ -31,7 +31,9 @@ const Contact = () => {
             <p className="font-normal text-sm leading-5">
               {contactSection.paragraph}{" "}
             </p>
-            <button className="font-bold text-sm leading-5.5 text-light-gray-1 capitalize rounded-md cursor-pointer py-4 px-10 gap-2.5 border border-light-gray-1">
+            <button
+             onClick={() => window.location.href = `mailto:info@example.com?subject=Contact US`}
+             className="font-bold text-sm leading-5.5 text-light-gray-1 capitalize rounded-md cursor-pointer py-4 px-10 gap-2.5 border border-light-gray-1 hover:bg-white hover:text-primary-color">
               {contactSection.buttonText}
             </button>
           </article>

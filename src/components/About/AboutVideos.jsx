@@ -12,9 +12,9 @@ const AboutVideos = () => {
   }, [dispatch, content]);
 
   if (loading)
-    return <div className="text-center py-10 font-bold">Yükleniyor...</div>;
+    return <div className="text-center py-10 font-bold">Loading...</div>;
   if (error)
-    return <div className="text-red-500 text-center py-10">Hata: {error}</div>;
+    return <div className="text-danger-color text-center py-10">Error: {error}</div>;
 
   const { aboutSection } = content || {};
 
@@ -23,13 +23,15 @@ const AboutVideos = () => {
       {aboutSection && (
         <article className="py-20 px-10">
           <div
-                style={{
-                  backgroundImage: `url(${aboutSection.aboutVideos})`,
-                }}
-                aria-label="shop-card images"
-                className="flex relative bg-cover bg-no-repeat bg-center rounded-4xl mx-auto w-77 h-80 flex-1 md:w-135 lg:w-200 xl:w-253 xl:h-143"
-              >
-            <button className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full p-6 bg-primary-color"><Play color="#ffffff" fill="#ffffff" /></button>
+            style={{
+              backgroundImage: `url(${aboutSection.aboutVideos})`,
+            }}
+            aria-label="shop-card images"
+            className="flex relative bg-cover bg-no-repeat bg-center rounded-4xl mx-auto w-77 h-80 flex-1 md:w-135 lg:w-200 xl:w-253 xl:h-143"
+          >
+            <button className="absolute z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full p-6 bg-primary-color">
+              <Play color="#ffffff" fill="#ffffff" />
+            </button>
           </div>
         </article>
       )}

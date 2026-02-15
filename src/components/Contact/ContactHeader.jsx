@@ -20,7 +20,7 @@ const ContactHeader = () => {
   if (loading)
     return <div className="text-center py-10 font-bold">Yükleniyor...</div>;
   if (error)
-    return <div className="text-red-500 text-center py-10">Hata: {error}</div>;
+    return <div className="text-danger-color text-center py-10">Error: {error}</div>;
 
   const { contactSection } = content || {};
 
@@ -36,28 +36,42 @@ const ContactHeader = () => {
               {contactSection.contactHeader.subtitle}
             </h2>
             <h4 className="font-normal text-xl leading-8 text-second-text-color">
-              {contactSection.contactHeader.paragraph?.split(",").map((text, index) => (
-                    <span key={index}>
-                      {text.trim()}
-                      {index === 0 && ","}
-                      {index === 0 && <br className="hidden xl:block" />}
-                    </span>
-                  ))}
+              {contactSection.contactHeader.paragraph
+                ?.split(",")
+                .map((text, index) => (
+                  <span key={index}>
+                    {text.trim()}
+                    {index === 0 && ","}
+                    {index === 0 && <br className="hidden xl:block" />}
+                  </span>
+                ))}
             </h4>
             <div className="font-bold text-2xl leading-8 text-text-color">
-                {
-                    contactSection.contactHeader.contact.map(item => (
-                        <p key={item.id} className="">{item.name} {"  "} ; {" "} {item.number} </p>
-                    ))
-                }
+              {contactSection.contactHeader.contact.map((item) => (
+                <p key={item.id} className="">
+                  {item.name} {"  "} ; {item.number}{" "}
+                </p>
+              ))}
             </div>
 
             <div className="flex items-center p-2.5 gap-8">
               {[
                 { Icon: FaTwitter, name: "twitter", link: "https://x.com/" },
-                { Icon: FaFacebook, name: "facebook", link: "https://www.facebook.com/" },
-                { Icon: FaInstagram, name: "instagram", link: "https://www.instagram.com/" },
-                { Icon: FaLinkedin, name: "linkedin", link: "https://linkedin.com/" },
+                {
+                  Icon: FaFacebook,
+                  name: "facebook",
+                  link: "https://www.facebook.com/",
+                },
+                {
+                  Icon: FaInstagram,
+                  name: "instagram",
+                  link: "https://www.instagram.com/",
+                },
+                {
+                  Icon: FaLinkedin,
+                  name: "linkedin",
+                  link: "https://linkedin.com/",
+                },
               ].map((item, idx) => (
                 <a
                   key={idx}

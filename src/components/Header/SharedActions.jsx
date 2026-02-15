@@ -1,11 +1,11 @@
-import { Search, ShoppingCart, Heart, LogOut } from "lucide-react"; // LogOut eklendi
+import { Search, ShoppingCart, Heart, LogOut } from "lucide-react"; 
 import { IoMdPerson, IoMdPersonAdd } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import Gravatar from "react-gravatar";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { logoutUser } from "../../store/actions/clientActions";
 import { toast } from "react-toastify";
-import CartDropdown from "../Order/CartDropdown";
+import CartDropdown from "../Cart/CartDropdown";
 import { useState } from "react";
 
 const SharedActions = ({
@@ -16,11 +16,11 @@ const SharedActions = ({
   setIsSearchOpen,
   isMobile,
   cartItemCount,
+  favoritesCount,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isCartOpen, setIsCartOpen] = useState(false);
-
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -28,16 +28,15 @@ const SharedActions = ({
     toast.success("Logged out successfully");
   };
 
-
   return (
     <div
-      className={`flex ${isMobile ? "flex-col items-center gap-6" : "flex-row items-center gap-4 xl:gap-6"}`}
+      className={`flex ${isMobile ? "flex-col items-center gap-6" : "flex-row items-center gap-4 xl:gap-4"}`}
     >
       <article
         className={`capitalize flex items-center justify-center gap-2 text-primary-color font-bold ${isMobile ? "text-3xl font-normal leading-12" : "text-sm"}`}
       >
         {isLoggedIn ? (
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-0.5">
             <div className="flex items-center gap-2 cursor-pointer group">
               <Gravatar
                 email={user.email}
@@ -51,11 +50,11 @@ const SharedActions = ({
             </div>
             <button
               onClick={handleLogout}
-              className="ml-2 text-text-color hover:text-danger-color transition-colors flex items-center gap-1"
+              className="ml-2 cursor-pointer text-text-color hover:text-danger-color transition-colors flex items-center gap-1"
               title="Logout"
             >
               <LogOut size={isMobile ? 28 : 18} />
-              {isMobile && <span className="text-lg">Logout</span>}
+              <span className="text-sm">Logout</span>
             </button>
           </div>
         ) : (
@@ -102,51 +101,52 @@ const SharedActions = ({
           }`}
         />
       </div>
-      <div className="flex items-center gap-4">
-        <div className="relative">
-          <button
-            onClick={() => setIsCartOpen(!isCartOpen)}
-            className="relative cursor-pointer focus:outline-none flex items-center justify-center group"
-          >
-            <ShoppingCart
-              size={24}
-              className={`transition-colors pointer-events-none ${
-                isCartOpen
-                  ? "text-primary-color"
-                  : "text-text-color group-hover:text-primary-color"
-              }`}
+
+      <div className="relative">
+        <button
+          onClick={() => setIsCartOpen((prev) => !prev)}
+          className="relative cursor-pointer focus:outline-none flex items-center justify-center group"
+        >
+          <ShoppingCart
+            size={24}
+            className={`transition-colors pointer-events-none ${
+              isCartOpen
+                ? "text-primary-color"
+                : "text-text-color group-hover:text-primary-color"
+            }`}
+          />
+
+          {cartItemCount > 0 && (
+            <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-5 h-5 px-1 text-[10px] font-bold text-white bg-primary-color border-2 border-white rounded-full pointer-events-none">
+              {cartItemCount}
+            </span>
+          )}
+        </button>
+        {isCartOpen && (
+          <>
+            <div
+              className="fixed inset-0 z-40 bg-transparent"
+              onClick={() => setIsCartOpen(false)}
             />
 
-            {cartItemCount > 0 && (
-              <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-5 h-5 px-1 text-[10px] font-bold text-white bg-primary-color border-2 border-white rounded-full pointer-events-none">
-                {cartItemCount}
-              </span>
-            )}
-          </button>
-          {isCartOpen && (
-            <>
-              <div
-                className="fixed inset-0 z-40 bg-transparent"
-                onClick={() => setIsCartOpen(false)}
-              />
-
-              <div className="absolute right-0 top-full mt-1 z-50">
-                <CartDropdown />
-              </div>
-            </>
-          )}
-        </div>
-
-        <button className="relative cursor-pointer group">
-          <Heart
-            size={24}
-            className="text-text-color group-hover:text-primary-color transition-colors"
-          />
-          <span className="absolute -top-2 -right-2 flex items-center justify-center w-5 h-5 text-[10px] font-bold text-white bg-primary-color border-2 border-white rounded-full">
-            3
-          </span>
-        </button>
+            <div className="absolute -right-30 top-full mt-1 z-50 xl:right-0">
+              <CartDropdown />
+            </div>
+          </>
+        )}
       </div>
+
+      <button className="relative cursor-pointer group">
+        <Heart
+          size={24}
+          className="text-text-color group-hover:text-primary-color transition-colors"
+        />
+        {favoritesCount > 0 && (
+          <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-5 h-5 px-1 text-[10px] font-bold text-white bg-primary-color border-2 border-white rounded-full pointer-events-none">
+            {favoritesCount}
+          </span>
+        )}
+      </button>
     </div>
   );
 };

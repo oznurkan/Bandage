@@ -27,7 +27,7 @@ const Login = () => {
       toast.success("Login successful!");
 
       const from = location.state?.from?.pathname || "/";
-      
+
       setTimeout(() => {
         navigate(from, { replace: true });
       }, 1000);
@@ -58,17 +58,19 @@ const Login = () => {
     <main className="min-h-screen w-full bg-white py-25 flex items-center justify-center">
       <section className="flex flex-col xl:flex-row mx-auto w-[90%] max-w-md xl:max-w-5xl font-montserrat bg-white shadow-2xl rounded-2xl overflow-hidden">
         <article className="hidden xl:flex xl:flex-1 bg-[#283747]  text-white flex-col justify-center items-center p-12 text-center gap-6 relative overflow-hidden">
-          
           <div className="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-32 h-32 bg-white/10 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></div>
-          
+          <div
+            className="absolute bottom-20 right-10 w-32 h-32 bg-white/10 rounded-full animate-pulse"
+            style={{ animationDelay: "0.3s" }}
+          ></div>
+
           <div className="relative z-10 flex flex-col justify-center mx-auto items-center text-center gap-7">
             <h2 className="text-4xl font-bold ">Hello, Friend!</h2>
             <p className="text-gray-300 max-w-xs">
               Enter your personal details and start your journey with us
             </p>
             <button
-              onClick={() => navigate('/signup')}
+              onClick={() => navigate("/signup")}
               className="font-bold text-sm uppercase cursor-pointer tracking-wider py-4 px-10 rounded-full border-2 border-white hover:bg-white hover:text-[#283747] transition-all duration-300 transform hover:scale-105"
             >
               Sign Up
@@ -76,7 +78,6 @@ const Login = () => {
           </div>
         </article>
 
-      
         <article className="w-full py-30 px-8 md:px-12 xl:flex-1">
           <h2 className="font-bold text-center text-3xl leading-10 text-text-color mb-10">
             Login
@@ -87,7 +88,10 @@ const Login = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-text-color">
+              <label
+                htmlFor="email"
+                className="block text-sm font-semibold text-text-color"
+              >
                 Email Address *
               </label>
               <input
@@ -104,12 +108,17 @@ const Login = () => {
                 placeholder="your@email.com"
               />
               {errors.email && (
-                <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>
+                <p className="mt-1 text-xs text-red-600">
+                  {errors.email.message}
+                </p>
               )}
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-semibold text-text-color">
+              <label
+                htmlFor="password"
+                className="block text-sm font-semibold text-text-color"
+              >
                 Password *
               </label>
               <input
@@ -147,7 +156,7 @@ const Login = () => {
               <div className="text-sm">
                 <button
                   type="button"
-                  onClick={() => navigate('/forgot-password')}
+                  onClick={() => navigate("/forgot-password")}
                   className="font-medium text-primary-color hover:text-primary-color-dark transition-colors"
                 >
                   Forgot password?
@@ -167,7 +176,7 @@ const Login = () => {
                 Don't have an account?{" "}
                 <button
                   type="button"
-                  onClick={() => navigate('/signup')}
+                  onClick={() => navigate("/signup")}
                   className="text-primary-color font-bold hover:underline"
                 >
                   Sign up
@@ -176,7 +185,6 @@ const Login = () => {
             </div>
           </form>
         </article>
-
       </section>
     </main>
   );

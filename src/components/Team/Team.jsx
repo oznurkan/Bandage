@@ -32,9 +32,16 @@ const Team = () => {
           </article>
           <article className="flex flex-col gap-8 mx-auto w-[60%] rounded-2xl flex-wrap md:flex-row md:w-[80%]">
             {teamSection.team.map((item) => (
-              <div key={item.id} className="flex flex-col items-center text-center gap-2.5 py-8 px-10 mx-auto bg-white md:w-[40%] lg:w-[30%] lg:mx-0 xl:w-[22%] xl:mx-auto">
+              <div
+                key={item.id}
+                className="flex flex-col items-center text-center gap-2.5 py-8 px-10 mx-auto bg-white md:w-[40%] lg:w-[30%] lg:mx-0 xl:w-[22%] xl:mx-auto"
+              >
                 <div className="w-32 h-32 mx-auto rounded-full overflow-hidden">
-                  <img className="h-full w-full object-cover" src={item.images} alt={item.name} />
+                  <img
+                    className="h-full w-full object-cover"
+                    src={item.images}
+                    alt={item.name}
+                  />
                 </div>
                 <h6 className="font-bold text-sm leading-6 text-primary-color capitalize">
                   {item.position}

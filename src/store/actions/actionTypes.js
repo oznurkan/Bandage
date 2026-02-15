@@ -10,10 +10,8 @@ export const SET_FETCH_STATE = "SET_FETCH_STATE";
 export const SET_LIMIT = "SET_LIMIT";
 export const SET_OFFSET = "SET_OFFSET";
 export const SET_FILTER = "SET_FILTER";
+export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
 
-export const SET_CART = "SET_CART";
-export const SET_PAYMENT = "SET_PAYMENT";
-export const SET_ADDRESS = "SET_ADDRESS";
 
 export const GET_DATA_FETCHING = "GET_DATA_FETCHING";
 export const GET_DATA_SUCCESS = "GET_DATA_SUCCESS";
@@ -24,5 +22,23 @@ export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAILED = "SIGNUP_FAILED";
 export const SIGNUP_RESET = "SIGNUP_RESET";
 
-
 export const SET_SELECTED_PRODUCT = "SET_SELECTED_PRODUCT";
+
+export const SET_CART = "SET_CART";
+export const SET_PAYMENT = "SET_PAYMENT";
+export const SET_ADDRESS = "SET_ADDRESS";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const UPDATE_CART_ITEM = "UPDATE_CART_ITEM";
+export const TOGGLE_CART_ITEM = "TOGGLE_CART_ITEM";
+export const CLEAR_CART = "CLEAR_CART";
+
+export const SET_ADDRESS_LIST = "SET_ADDRESS_LIST";
+export const ADD_ADDRESS = "ADD_ADDRESS";
+export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
+export const DELETE_ADDRESS = "DELETE_ADDRESS";
+
+export const SET_CREDIT_CARDS = "SET_CREDIT_CARDS";
+export const ADD_CREDIT_CARD = "ADD_CREDIT_CARD";
+export const UPDATE_CREDIT_CARD = "UPDATE_CREDIT_CARD";
+export const DELETE_CREDIT_CARD = "DELETE_CREDIT_CARD";

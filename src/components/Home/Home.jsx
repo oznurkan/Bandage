@@ -8,7 +8,7 @@ const Home = () => {
   const navigate = useNavigate();
   const { content, loading, error } = useSelector((state) => state.appData);
   const [activeSlide, setActiveSlide] = useState(0);
- 
+
   useEffect(() => {
     if (!content) dispatch(getDataInfo());
   }, [dispatch, content]);
@@ -27,16 +27,21 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [headerSections]);
 
-  if (loading) return <div className="text-center py-10 font-montserrat">Yükleniyor...</div>;
-  if (error) return <div className="text-red-500 text-center py-10">Hata: {error}</div>;
+  if (loading)
+    return (
+      <div className="text-center py-10 font-montserrat">Yükleniyor...</div>
+    );
+  if (error)
+    return <div className="text-red-500 text-center py-10">Hata: {error}</div>;
 
   const currentSlide = headerSections[activeSlide];
 
   return (
     <main className="flex overflow-hidden relative w-full bg-white h-screen">
-      <header className={`flex w-[97%] mx-auto h-screen rounded-3xl bg-linear-to-r ${currentSlide?.bg || "from-[#96E9FB] to-[#ABECD6]"} xl:w-[90%] xl:h-[76%] transition-all duration-1000 ease-in-out`}>
+      <header
+        className={`flex w-[97%] mx-auto h-screen rounded-3xl bg-linear-to-r ${currentSlide?.bg || "from-[#96E9FB] to-[#ABECD6]"} xl:w-[90%] xl:h-[76%] transition-all duration-1000 ease-in-out`}
+      >
         <section className="flex flex-col box-border items-center justify-center w-full h-full pt-20 xl:pt-0 xl:flex-row relative">
-          
           {currentSlide && (
             <>
               <article className="w-full xl:w-1/2 flex flex-col items-center justify-center text-center gap-8 px-4 sm:px-8 xl:items-start xl:text-start xl:px-0 xl:pl-20 z-10">
@@ -55,15 +60,15 @@ const Home = () => {
                     </span>
                   ))}
                 </h4>
-                <button 
-                onClick={() => navigate("/shop")}
-                className="uppercase rounded-sm py-4 px-10 gap-2.5 font-montserrat font-normal text-xl leading-8 text-white bg-primary-color cursor-pointer hover:scale-105 transition-transform">
+                <button
+                  onClick={() => navigate("/shop")}
+                  className="uppercase rounded-sm py-4 px-10 gap-2.5 font-montserrat font-normal text-xl leading-8 text-white bg-primary-color cursor-pointer hover:scale-105 transition-transform"
+                >
                   {currentSlide.buttonText}
                 </button>
               </article>
               <article className="relative w-full xl:w-1/2 flex flex-col justify-end overflow-hidden xl:overflow-visible items-center h-full xl:flex-row xl:items-start">
                 <div className="absolute z-20 w-full h-full flex items-end justify-center">
-                  
                   <div className="absolute left-46/100 -translate-x-1/2 bottom-[17%] w-72 h-72 bg-white rounded-full z-0 shadow-sm md:w-80 md:h-80 xl:w-105 xl:h-105 xl:top-0 xl:left-auto xl:bottom-auto xl:translate-x-0 xl:right-0" />
 
                   <div className="absolute left-1/2 -translate-x-48.75 top-[10%] md:top-[5%] md:-translate-x-60 xl:-translate-x-50.5 xl:top-[1%] w-12 h-12 bg-white rounded-full z-10 shadow-md xl:w-20 xl:h-20" />
