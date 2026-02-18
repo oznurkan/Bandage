@@ -88,11 +88,11 @@ const ProductCard = () => {
               {products.slice(0, visibleCount).map((product) => (
                 <div
                   key={product.id}
-                  className="flex flex-col items-center bg-white gap-15 md:flex-1/2 md:justify-start lg:flex-1/3 xl:flex-1/5 xl:gap-7"
+                  className="flex flex-col items-center bg-white gap-15 md:flex-1/2 md:justify-start lg:flex-1/3 xl:flex-1/5 xl:gap-5"
                 >
                   <div
-                    onClick={() => navigate(`/product/${product.id}`)}
-                    className="w-73.75 h-90 mx-auto lg:w-45.75 lg:h-59.5 xl:w-45.75 xl:h-59.5 cursor-pointer overflow-hidden"
+                    onClick={() => handleProductClick(product)}
+                    className="w-73.75 h-90 mx-auto lg:w-45.75 lg:h-59.5 xl:w-60 xl:h-90 cursor-pointer overflow-hidden"
                   >
                     <img
                       src={

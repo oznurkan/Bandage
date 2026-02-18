@@ -50,11 +50,11 @@ const SharedActions = ({
             </div>
             <button
               onClick={handleLogout}
-              className="ml-2 cursor-pointer text-text-color hover:text-danger-color transition-colors flex items-center gap-1"
+              className="group ml-2 cursor-pointer text-text-color hover:text-danger-color transition-colors flex items-center gap-1"
               title="Logout"
             >
               <LogOut size={isMobile ? 28 : 18} />
-              <span className="text-sm">Logout</span>
+              <span className="text-sm transition-all duration-300 opacity-0 group-hover:opacity-100">Logout</span>
             </button>
           </div>
         ) : (

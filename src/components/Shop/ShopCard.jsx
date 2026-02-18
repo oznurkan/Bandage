@@ -22,11 +22,9 @@ const ShopCard = () => {
                     `/shop/${shop.gender === "k" ? "kadin" : "erkek"}/${shop.slug}/${shop.id}`,
                   )
                 }
-                style={{
-                  backgroundImage: `linear-gradient(rgba(33, 33, 33, 0.4), rgba(33, 33, 33, 0.4)), url(${shop.img})`,
-                }}
-                className="flex flex-col justify-center items-center mx-auto gap-5 text-white font-montserrat font-bold bg-cover bg-no-repeat bg-center w-83 h-75 md:w-150 lg:w-200"
-              >
+                style={{ "--shop-img": `url(${shop.img})` }}
+                  className="flex cursor-pointer flex-col justify-center items-center mx-auto gap-5 text-white font-montserrat font-bold bg-cover bg-no-repeat bg-center w-83 h-75 md:w-150 lg:w-200 
+                    transition-all duration-300 bg-[linear-gradient(rgba(33,33,33,0.4),rgba(33,33,33,0.4)),var(--shop-img)] hover:[background-image:var(--shop-img)] hover:scale-110">
                 <h5 className="text-base leading-6 uppercase">{shop.title}</h5>
                 <h6 className="text-sm leading-6 capitalize flex gap-2 ">
                   <span>Rating</span>

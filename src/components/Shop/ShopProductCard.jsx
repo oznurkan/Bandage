@@ -51,6 +51,7 @@ const ShopProductCard = ({ products, isGridView }) => {
                 }
               >
                 <div
+                  onClick={() => handleProductClick(product)}
                   className={
                     isGridView
                       ? "flex justify-center mx-auto items-center w-full h-107 xl:h-70 "
@@ -60,7 +61,7 @@ const ShopProductCard = ({ products, isGridView }) => {
                   <img
                     src={product.images?.[0]?.url || ""}
                     alt={product.name}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain hover:scale-110 cursor-pointer"
                   />
                 </div>
                 <div
