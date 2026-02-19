@@ -84,7 +84,7 @@ const OrderHistory = () => {
         </p>
         <button
           onClick={() => navigate("/shop")}
-          className="px-6 py-3 bg-primary-color text-white rounded-lg hover:bg-opacity-90 transition-all"
+          className="mt-4 px-12 py-4 bg-primary-color text-white font-bold rounded-lg hover:shadow-xl hover:bg-blue-600 transition-all active:scale-95 cursor-pointer uppercase text-sm tracking-wider"
         >
           Start Shopping
         </button>
@@ -226,7 +226,7 @@ const OrderHistory = () => {
                                   <img
                                     src={
                                       product.images?.[0]?.url ||
-                                      "/placeholder.jpg"
+                                      ""
                                     }
                                     alt={product.name}
                                     className="w-20 h-20 object-cover rounded-lg shrink-0"
