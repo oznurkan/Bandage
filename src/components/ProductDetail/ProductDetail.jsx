@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductDetail } from "../../store/actions/productActions";
 import { addToCart } from "../../store/actions/shoppingCartActions";
 import { ADD_TO_FAVORITES } from "../../store/actions/actionTypes";
+import { toast } from "react-toastify";
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -59,6 +60,7 @@ const ProductDetail = () => {
         break;
       case "ShoppingCart":
         dispatch(addToCart(productData));
+        toast.success("Products added the cart");
         break;
       default:
         break;

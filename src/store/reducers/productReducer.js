@@ -8,6 +8,7 @@ import {
   SET_FILTER,
   SET_SELECTED_PRODUCT,
   ADD_TO_FAVORITES,
+  APPEND_PRODUCT_LIST,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -34,6 +35,12 @@ const productReducer = (state = initialState, action) => {
       return {
         ...state,
         productList: action.payload,
+      };
+
+    case APPEND_PRODUCT_LIST:
+      return {
+        ...state,
+        productList: [...state.productList, ...action.payload],
       };
 
     case SET_TOTAL:

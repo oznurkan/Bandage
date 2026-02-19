@@ -38,7 +38,7 @@ const ShopProductCard = ({ products, isGridView }) => {
             className={`mx-auto ${
               isGridView
                 ? "flex flex-wrap w-full justify-start gap-9 md:w-[80%]"
-                : "flex flex-col gap-6 md:w-[82%]"
+                : "flex flex-col mx-auto gap-6 md:w-[82%]"
             }`}
           >
             {products?.map((product) => (
@@ -46,16 +46,16 @@ const ShopProductCard = ({ products, isGridView }) => {
                 key={product.id}
                 className={
                   isGridView
-                    ? "flex flex-col items-center w-full mx-auto md:w-[46%] lg:w-[30%] xl:w-[17%] md:mx-0 "
-                    : "flex flex-row items-center w-full border-b border-[#E8E8E8] pb-6 gap-6"
+                    ? "flex flex-col items-center w-full mx-auto md:w-[46%] lg:w-[30%] xl:w-[16.5%] md:mx-0 "
+                    : "flex flex-row justify-between mx-auto items-center w-full border-b border-[#E8E8E8] pb-6 gap-2 xl:gap-6"
                 }
               >
                 <div
                   onClick={() => handleProductClick(product)}
                   className={
                     isGridView
-                      ? "flex justify-center mx-auto items-center w-full h-107 xl:h-70 "
-                      : "flex justify-center items-center w-48 h-48 shrink-0 "
+                      ? "flex justify-center mx-auto items-center w-full h-107 xl:h-60 "
+                      : "flex justify-center items-center w-48 h-48 shrink-0 flex-1"
                   }
                 >
                   <img
@@ -68,22 +68,34 @@ const ShopProductCard = ({ products, isGridView }) => {
                   className={`flex flex-col gap-2 w-full capitalize font-bold leading-6 ${
                     isGridView
                       ? "items-center text-center py-7"
-                      : "items-start text-start"
+                      : "items-start text-start flex-1"
                   }`}
                 >
-                  <h5 className="text-base text-text-color">{product.name}</h5>
+                  <h5 className="text-sm text-second-text-color">
+                    {product.name}
+                  </h5>
                   <a
                     onClick={() => handleProductClick(product)}
-                    className="text-sm cursor-pointer text-second-text-color"
+                    className="text-base cursor-pointer text-text-color"
                   >
                     {product.name}
                   </a>
+                  {!isHomePage && (
+                    <h5
+                      className={`text-sm cursor-pointer text-second-text-color
+                  ${isGridView ? "hidden" : "hidden md:flex"}`}
+                    >
+                      {product.description}
+                    </h5>
+                  )}
                   <div
                     className={`flex gap-3 text-base ${
                       isGridView ? "justify-center" : "justify-start"
                     }`}
                   >
-                    <span className="text-muted-color">${product.price}</span>
+                    <span className="text-muted-color line-through">
+                      ${product.price}
+                    </span>
                     <span className="text-second-color-1">
                       ${product.price}
                     </span>

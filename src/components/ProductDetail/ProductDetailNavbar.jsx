@@ -11,10 +11,10 @@ const ProductDetailNavbar = () => {
         <div className="flex items-center">
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center cursor-pointer border p-2 gap-1 text-primary-color hover:text-blue-700 transition-all text-sm group"
+            className="flex items-center cursor-pointer border py-2 px-4 gap-1 rounded-lg text-primary-color hover:text-blue-700 transition-all text-sm group"
           >
             <ChevronLeft size={20} className=" transition-transform" />
-            Back to Shop
+            Back
           </button>
         </div>
         <nav className="flex py-2.5 gap-4 text-sm leading-6">

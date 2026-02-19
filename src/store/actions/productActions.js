@@ -11,6 +11,7 @@ import {
   SET_FILTER,
   SET_SELECTED_PRODUCT,
   ADD_TO_FAVORITES,
+  APPEND_PRODUCT_LIST,
 } from "../actions/actionTypes";
 
 export const setCategories = (categories) => ({
@@ -58,12 +59,18 @@ export const addToFavorites = (product) => ({
   payload: product,
 });
 
+export const appendProductList = (products) => ({
+  type: APPEND_PRODUCT_LIST, 
+  payload: products,
+});
+
 export const getProducts = (
   categoryId,
   filter,
   sort,
   limit = 25,
   offset = 0,
+  isAppend = false
 ) => {
   return async (dispatch) => {
     dispatch(setFetchState("FETCHING"));
@@ -74,14 +81,22 @@ export const getProducts = (
 
     try {
       const response = await api.get("/products", { params });
+      const products = response.data.products || [];
 
-      dispatch(setProductList(response.data.products || []));
+      if (isAppend) {
+        dispatch(appendProductList(products));
+      } else {
+        dispatch(setProductList(products));
+      }
+
       dispatch(setTotal(response.data.total || 0));
       dispatch(setFetchState("FETCHED"));
     } catch (error) {
       dispatch(setFetchState("FAILED"));
-      dispatch(setProductList([]));
-      dispatch(setTotal(0));
+      if (!isAppend) {
+        dispatch(setProductList([]));
+        dispatch(setTotal(0));
+      }
 
       console.error("GetProducts Error:", error);
       toast.error("Ürünler yüklenirken bir sorun oluştu.");

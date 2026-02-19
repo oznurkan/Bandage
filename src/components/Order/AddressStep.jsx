@@ -23,6 +23,15 @@ const AddressStep = ({
     dispatch(getAddresses());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (showAddressForm) {
+      window.scrollTo({
+        top: 350,
+        behavior: "smooth",
+      });
+    }
+  }, [showAddressForm]);
+
   const handleSelect = (addr) => {
     dispatch({ type: "SET_ADDRESS", payload: addr });
   };

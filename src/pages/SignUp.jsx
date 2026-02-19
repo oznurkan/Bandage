@@ -269,7 +269,7 @@ const SignUp = () => {
                       },
                     })}
                     id="store_name"
-                    placeholder="My Store"
+                    placeholder=""
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-color outline-none"
                   />
                   {errors.store_name && (
@@ -295,7 +295,7 @@ const SignUp = () => {
                       },
                     })}
                     id="store_phone"
-                    placeholder="+905551234567"
+                    placeholder=""
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-color outline-none"
                   />
                   {errors.store_phone && (
@@ -321,7 +321,7 @@ const SignUp = () => {
                       },
                     })}
                     id="store_tax_no"
-                    placeholder="T1234V567890"
+                    placeholder=""
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-color outline-none"
                   />
                   {errors.store_tax_no && (
@@ -347,7 +347,7 @@ const SignUp = () => {
                       },
                     })}
                     id="store_bank_account"
-                    placeholder="TR000000000000000000000000"
+                    placeholder=""
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-color outline-none"
                   />
                   {errors.store_bank_account && (

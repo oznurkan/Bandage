@@ -6,6 +6,9 @@ import {
   deleteCreditCards,
   getCreditCards,
 } from "../../store/actions/clientActions";
+import {
+  setInstallment,
+} from "../../store/actions/shoppingCartActions";
 import CardForm from "./CartForm";
 
 const CartStep = ({
@@ -19,11 +22,26 @@ const CartStep = ({
   const dispatch = useDispatch();
   const cardList = useSelector((state) => state.client.creditCards);
   const selectedCard = useSelector((state) => state.shoppingCart.payment);
+  const cartItems = useSelector((state) => state.shoppingCart.cart);
+  const selectedInstallment = useSelector((state) => state.shoppingCart.installment);
+
+  const grandTotal = cartItems
+  .filter((item) => item.checked)
+  .reduce((acc, item) => acc + (item.count * item.product.price), 0);
   const [selectedRadio, setSelectedRadio] = useState("creditCard");
 
   useEffect(() => {
     dispatch(getCreditCards());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (showCardForm) {
+      window.scrollTo({
+        top: 350,
+        behavior: "smooth",
+      });
+    }
+  }, [showCardForm]);
 
   const handleSelectCard = (card) => {
     dispatch({
@@ -36,6 +54,7 @@ const CartStep = ({
         name_on_card: card.name_on_card,
       },
     });
+    dispatch(setInstallment(1));
   };
 
   const handleDeleteCard = (e, id) => {
@@ -43,6 +62,15 @@ const CartStep = ({
     if (window.confirm("Are you sure you want to delete this credit card?")) {
       dispatch(deleteCreditCards(id));
     }
+  };
+
+  const getInstallmentsByCard = (cardNumber) => {
+    if (!cardNumber) return [1];
+    const cleanNumber = cardNumber.replace(/\s/g, "");
+    if (cleanNumber.startsWith("9")) {
+      return [1, 2, 3, 6]; 
+    }
+    return [1, 2, 3];
   };
 
   return (
@@ -134,6 +162,41 @@ const CartStep = ({
               </div>
             ))}
           </div>
+          {selectedCard && (
+            <div className="w-full mt-8 p-6 bg-gray-50 rounded-xl border border-dashed border-gray-300">
+              <h3 className="text-sm font-bold text-second-text-color mb-4 flex items-center gap-2">
+                <span role="img" aria-label="card">💳</span> INSTALLMENT OPTIONS 
+                {selectedCard?.card_no?.startsWith("9") && 
+                  <span className="text-[10px] bg-primary-color text-white px-2 py-0.5 rounded uppercase tracking-wider">
+                    TROY Special
+                  </span>
+                }
+              </h3>
+              
+              <div className="flex flex-wrap font-montserrat gap-4">
+                {getInstallmentsByCard(selectedCard.card_no).map((installment) => (
+                  <label 
+                    key={installment}
+                    onClick={() => dispatch(setInstallment(installment))}
+                    className={`cursor-pointer w-70 p-4 rounded-lg border-2 transition-all flex flex-col items-center
+                      ${selectedInstallment === installment 
+                        ? "border-primary-color bg-white shadow-md ring-1 ring-primary-color/20" 
+                        : "border-transparent bg-gray-100 hover:bg-gray-200"}`}
+                  >
+                    <span className="text-lg font-bold text-text-color">
+                      {installment === 1 ? "Single Payment" : `${installment} Installments`}
+                    </span>
+                    <span className="text-xs text-second-text-color font-medium mt-1">
+                      {installment === 1 
+                        ? `${grandTotal.toFixed(2)} ₺` 
+                        : `${(grandTotal / installment).toFixed(2)} ₺ x ${installment}`
+                      }
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          )}
           <button className="w-full flex justify-start py-10">
             <ArrowBigLeft
               onClick={onBack}

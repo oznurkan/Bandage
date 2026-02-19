@@ -104,7 +104,7 @@ const Header = () => {
               </div>
             </article>
           </section>
-          <header className="flex justify-between font-montserrat items-center w-[80%] xl:w-[95%] mx-auto py-5 bg-transparent xl:bg-white">
+          <header className="flex justify-between font-montserrat items-center w-[80%] xl:w-[95%] mx-auto py-5 bg-transparent xl:bg-white ">
             <article className="flex items-center gap-10 xl:gap-35">
               <h1
                 onClick={() => navigate("/")}
@@ -121,7 +121,7 @@ const Header = () => {
 
             <section className="flex items-center gap-4 xl:gap-8">
               {!isMenuOpen && (
-                <article className="hidden xl:flex">
+                <article className="hidden xl:flex ">
                   <SharedActions
                     header={header}
                     user={user}

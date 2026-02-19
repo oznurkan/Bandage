@@ -19,6 +19,9 @@ import OrderPage from "./pages/OrderPage";
 import { useLocation } from "react-router-dom";
 import ProtectedRoute from "./components/Router/ProtectedRoute";
 import SuccessPage from "./pages/SuccessPage";
+import OrderHistory from "./pages/OrderHistory";
+import FavoritesPage from "./pages/FavoritesPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   const location = useLocation();
@@ -65,8 +68,11 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="orders" element={<ProtectedRoute><OrderHistory /></ProtectedRoute>} />
+          <Route path="favorites" element={<ProtectedRoute><FavoritesPage /></ProtectedRoute>} />
           <Route path="signup" element={<SignUp />} />
           <Route path="login" element={<Login />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </>

@@ -62,11 +62,9 @@ export const loginUser = (credentials, rememberMe = false) => {
       .post("/login", credentials)
       .then((response) => {
         const data = response.data;
-
         if (rememberMe && data.token) {
           localStorage.setItem("token", data.token);
         }
-
         api.defaults.headers.common["Authorization"] = data.token;
         dispatch(setUser(data));
 

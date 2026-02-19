@@ -8,6 +8,7 @@ import {
   UPDATE_CART_ITEM,
   TOGGLE_CART_ITEM,
   CLEAR_CART,
+  SET_INSTALLMENT
 } from "./actionTypes";
 
 export const setCart = (cart) => ({
@@ -49,6 +50,12 @@ export const setAddress = (address) => ({
   payload: address,
 });
 
+export const setInstallment = (installment) => ({
+  type: SET_INSTALLMENT, 
+  payload: installment,
+});
+
+
 export const createOrderAction = (orderData) => async (dispatch, getState) => {
   const { shoppingCart } = getState();
 
@@ -71,12 +78,8 @@ export const createOrderAction = (orderData) => async (dispatch, getState) => {
   };
   try {
     const response = await api.post("/order", orderPayload);
-    console.log(
-      "Store'dan alınan verilerle sipariş oluşturuldu:",
-      response.data,
-    );
-
     dispatch(clearCart());
+    dispatch(setInstallment(1));
 
     return response;
   } catch (error) {

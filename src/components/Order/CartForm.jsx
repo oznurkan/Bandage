@@ -203,7 +203,7 @@ const CardForm = ({ onCancelCard, cardToEdit }) => {
             <button
               type="button"
               onClick={() => onCancelCard(false)}
-              className="px-6 py-3 border border-gray-300 rounded-md font-bold text-gray-500 hover:bg-gray-50"
+              className="px-6 py-3 border cursor-pointer border-gray-300 rounded-md font-bold text-gray-500 hover:bg-gray-50"
             >
               Cancel
             </button>

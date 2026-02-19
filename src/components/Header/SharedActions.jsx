@@ -1,16 +1,12 @@
-import { Search, ShoppingCart, Heart, LogOut } from "lucide-react"; 
+import { Search, ShoppingCart, Heart, LogOut } from "lucide-react";
 import { IoMdPerson, IoMdPersonAdd } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import Gravatar from "react-gravatar";
-import { useDispatch } from "react-redux";
-import { logoutUser } from "../../store/actions/clientActions";
-import { toast } from "react-toastify";
 import CartDropdown from "../Cart/CartDropdown";
 import { useState } from "react";
+import UserDropdown from "./UserDropdown";
 
 const SharedActions = ({
   header,
-  user,
   isLoggedIn,
   isSearchOpen,
   setIsSearchOpen,
@@ -19,14 +15,7 @@ const SharedActions = ({
   favoritesCount,
 }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [isCartOpen, setIsCartOpen] = useState(false);
-
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    navigate("/");
-    toast.success("Logged out successfully");
-  };
 
   return (
     <div
@@ -37,25 +26,7 @@ const SharedActions = ({
       >
         {isLoggedIn ? (
           <div className="flex items-center gap-0.5">
-            <div className="flex items-center gap-2 cursor-pointer group">
-              <Gravatar
-                email={user.email}
-                size={isMobile ? 40 : 32}
-                className="rounded-full border-2 border-primary-color transition-transform group-hover:scale-110"
-                default="identicon"
-              />
-              {!isMobile && (
-                <span className="text-text-color font-bold">{user.name}</span>
-              )}
-            </div>
-            <button
-              onClick={handleLogout}
-              className="group ml-2 cursor-pointer text-text-color hover:text-danger-color transition-colors flex items-center gap-1"
-              title="Logout"
-            >
-              <LogOut size={isMobile ? 28 : 18} />
-              <span className="text-sm transition-all duration-300 opacity-0 group-hover:opacity-100">Logout</span>
-            </button>
+            <UserDropdown isMobile={isMobile} />
           </div>
         ) : (
           <>
@@ -139,6 +110,7 @@ const SharedActions = ({
       <button className="relative cursor-pointer group">
         <Heart
           size={24}
+          onClick={() => navigate("/favorites")}
           className="text-text-color group-hover:text-primary-color transition-colors"
         />
         {favoritesCount > 0 && (

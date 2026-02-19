@@ -7,12 +7,14 @@ import {
   UPDATE_CART_ITEM,
   TOGGLE_CART_ITEM,
   CLEAR_CART,
+  SET_INSTALLMENT
 } from "../actions/actionTypes";
 
 const initialState = {
   cart: [],
   payment: {},
   address: {},
+  installment: 1,
 };
 
 const shoppingCartReducer = (state = initialState, action) => {
@@ -101,6 +103,9 @@ const shoppingCartReducer = (state = initialState, action) => {
         ...state,
         address: action.payload,
       };
+
+    case SET_INSTALLMENT:
+      return { ...state, installment: action.payload };
 
     default:
       return state;
